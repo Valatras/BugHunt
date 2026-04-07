@@ -27,6 +27,7 @@
     "@tanstack/router-plugin": "^1.141.1",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
+    "hooks": "workspace:*",
     "lucide-react": "catalog:",
     "next-themes": "catalog:",
     "react": "^19.2.3",

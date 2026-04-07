@@ -1,0 +1,14 @@
+
+{
+  "name": "hooks",
+  "main": "src/index.ts",
+  "packageManager": "pnpm@10.28.0",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "@tanstack/react-query": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14"
+  }
+}
