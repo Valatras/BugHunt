@@ -1,0 +1,54 @@
+services:
+  web:
+    build:
+      context: .
+      target: web
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - BETTER_AUTH_SECRET=hJk6wBhqmblvd2UpfYMvuB7OVJncr1RA
+      - BETTER_AUTH_URL=http://localhost:3001
+      - CORS_ORIGIN=http://localhost:3001
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/bughunt
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  mobile:
+    build:
+      context: .
+      target: mobile
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - EXPO_PUBLIC_SERVER_URL=http://localhost:3001
+    depends_on:
+      web:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16
+    container_name: bughunt-postgres-db
+    environment:
+      POSTGRES_DB: bughunt
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - bughunt_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  bughunt_postgres_data:
