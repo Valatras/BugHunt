@@ -3,4 +3,7 @@ model Insect {
     id          Int     @id @default(autoincrement())
     name        String  
     Sci_Name    String
+
+    featured   Boolean @default(false)
+    rarity     String  @default("Commun")
 }
