@@ -1,3 +1,12 @@
+enum Rarity {
+    Commun
+    Rare
+    Epique
+    Legendaire
+}
+
+
+
 model Insect {
 
     id          Int     @id @default(autoincrement())
@@ -5,5 +14,5 @@ model Insect {
     Sci_Name    String
 
     featured   Boolean @default(false)
-    rarity     String  @default("Commun")
+    rarity     Rarity @default(Commun)
 }

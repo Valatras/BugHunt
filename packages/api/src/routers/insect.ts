@@ -2,6 +2,7 @@ import prisma from "@my-better-t-app/db";
 import z from "zod";
 
 import { publicProcedure, protectedProcedure } from "../index";
+import { Rarity } from "../../../db/prisma/generated/enums";
 
 // Helper function to shuffle array for getFeatured endpoint using the Fisher-Yates algorithm
 function shuffleArray<T>(array: T[]): T[] {
@@ -39,7 +40,9 @@ export const insectRouter = {
         return await prisma.insect.create({
             data: {
                 name: input.name,
-                Sci_Name: input.sci_name
+                Sci_Name: input.sci_name,
+                featured: true,
+                rarity: Rarity.Commun,
             }
         
         })

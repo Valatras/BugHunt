@@ -19,7 +19,9 @@
     "db:start": "turbo -F @my-better-t-app/db db:start",
     "db:watch": "turbo -F @my-better-t-app/db db:watch",
     "db:stop": "turbo -F @my-better-t-app/db db:stop",
-    "db:down": "turbo -F @my-better-t-app/db db:down"
+    "db:down": "turbo -F @my-better-t-app/db db:down",
+    "db:seed": "turbo -F @my-better-t-app/db db:seed",
+    "db:reset": "turbo -F @my-better-t-app/db db:reset"
   },
   "dependencies": {
     "@my-better-t-app/env": "workspace:*",
