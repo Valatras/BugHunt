@@ -3,12 +3,12 @@ import z from "zod";
 
 import { publicProcedure, protectedProcedure } from "../index";
 
-// Helper function to shuffle array for getFeatured endpoint
+// Helper function to shuffle array for getFeatured endpoint using the Fisher-Yates algorithm
 function shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array];
+    const shuffled = [...array]; // Create a copy of the array using the spread operator ...
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        [shuffled[i], shuffled[j]] = [shuffled[j]!, shuffled[i]!]; // using ! to assert that the values are not undefined
     }
     return shuffled;
 }
@@ -43,7 +43,9 @@ export const insectRouter = {
             }
         
         })
-    } /* CREATE A RETIRER*/ 
+    } /* CREATE A RETIRER*/ ,
+
+    // getUserCollection à faire pour récupérer les insectes d'un utilisateur (collection).
     
     )
 }
