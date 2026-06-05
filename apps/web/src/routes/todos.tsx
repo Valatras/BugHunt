@@ -8,49 +8,32 @@ import {
 } from "@my-better-t-app/ui/components/card";
 import { Checkbox } from "@my-better-t-app/ui/components/checkbox";
 import { Input } from "@my-better-t-app/ui/components/input";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Loader2, Trash2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { type FormEvent } from "react";
 
 import { orpc } from "@/utils/orpc";
+import { useTask } from "hooks";
 
 export const Route = createFileRoute("/todos")({
   component: TodosRoute,
 });
 
 function TodosRoute() {
-  const [newTodoText, setNewTodoText] = useState("");
+  const {
+    newTodoText,
+    setNewTodoText,
+    todos,
+    createMutation,
+    toggleMutation,
+    deleteMutation,
+    handleAddTodo,
+    isLoading,
+  } = useTask(orpc);
 
-  const todos = useQuery(orpc.todo.getAll.queryOptions());
-  const createMutation = useMutation(
-    orpc.todo.create.mutationOptions({
-      onSuccess: () => {
-        todos.refetch();
-        setNewTodoText("");
-      },
-    }),
-  );
-  const toggleMutation = useMutation(
-    orpc.todo.toggle.mutationOptions({
-      onSuccess: () => {
-        todos.refetch();
-      },
-    }),
-  );
-  const deleteMutation = useMutation(
-    orpc.todo.delete.mutationOptions({
-      onSuccess: () => {
-        todos.refetch();
-      },
-    }),
-  );
-
-  const handleAddTodo = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (newTodoText.trim()) {
-      createMutation.mutate({ text: newTodoText });
-    }
+    handleAddTodo();
   };
 
   const handleToggleTodo = (id: number, completed: boolean) => {
@@ -69,19 +52,29 @@ function TodosRoute() {
           <CardDescription>Manage your tasks efficiently</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleAddTodo} className="mb-6 flex items-center space-x-2">
+          <form
+            onSubmit={handleSubmit}
+            className="mb-6 flex items-center space-x-2"
+          >
             <Input
               value={newTodoText}
               onChange={(e) => setNewTodoText(e.target.value)}
               placeholder="Add a new task..."
               disabled={createMutation.isPending}
             />
-            <Button type="submit" disabled={createMutation.isPending || !newTodoText.trim()}>
-              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add"}
+            <Button
+              type="submit"
+              disabled={createMutation.isPending || !newTodoText.trim()}
+            >
+              {createMutation.isPending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                "Add"
+              )}
             </Button>
           </form>
 
-          {todos.isLoading ? (
+          {isLoading ? (
             <div className="flex justify-center py-4">
               <Loader2 className="h-6 w-6 animate-spin" />
             </div>
@@ -97,7 +90,9 @@ function TodosRoute() {
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       checked={todo.completed}
-                      onCheckedChange={() => handleToggleTodo(todo.id, todo.completed)}
+                      onCheckedChange={() =>
+                        handleToggleTodo(todo.id, todo.completed)
+                      }
                       id={`todo-${todo.id}`}
                     />
                     <label
