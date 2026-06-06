@@ -31,7 +31,9 @@ function DrawerLayout() {
         options={{
           headerTitle: "Home",
           drawerLabel: ({ color, focused }) => (
-            <Text style={{ color: focused ? color : themeColorForeground }}>Home</Text>
+            <Text style={{ color: focused ? color : themeColorForeground }}>
+              Home
+            </Text>
           ),
           drawerIcon: ({ size, color, focused }) => (
             <Ionicons
@@ -42,12 +44,34 @@ function DrawerLayout() {
           ),
         }}
       />
+
+      <Drawer.Screen
+        name="(wish)"
+        options={{
+          headerTitle: "hunt",
+          drawerLabel: ({ color, focused }) => (
+            <Text style={{ color: focused ? color : themeColorForeground }}>
+              hunt
+            </Text>
+          ),
+          drawerIcon: ({ size, color, focused }) => (
+            <Ionicons
+              name="cube"
+              size={size}
+              color={focused ? color : themeColorForeground}
+            />
+          ),
+        }}
+      />
+
       <Drawer.Screen
         name="(tabs)"
         options={{
           headerTitle: "Tabs",
           drawerLabel: ({ color, focused }) => (
-            <Text style={{ color: focused ? color : themeColorForeground }}>Tabs</Text>
+            <Text style={{ color: focused ? color : themeColorForeground }}>
+              Tabs
+            </Text>
           ),
           drawerIcon: ({ size, color, focused }) => (
             <MaterialIcons
@@ -59,7 +83,11 @@ function DrawerLayout() {
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable className="mr-4">
-                <Ionicons name="add-outline" size={24} color={themeColorForeground} />
+                <Ionicons
+                  name="add-outline"
+                  size={24}
+                  color={themeColorForeground}
+                />
               </Pressable>
             </Link>
           ),
@@ -70,7 +98,9 @@ function DrawerLayout() {
         options={{
           headerTitle: "Todos",
           drawerLabel: ({ color, focused }) => (
-            <Text style={{ color: focused ? color : themeColorForeground }}>Todos</Text>
+            <Text style={{ color: focused ? color : themeColorForeground }}>
+              Todos
+            </Text>
           ),
           drawerIcon: ({ size, color, focused }) => (
             <Ionicons

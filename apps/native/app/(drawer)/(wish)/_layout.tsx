@@ -2,13 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useThemeColor } from "heroui-native";
 
-export default function TabLayout() {
+export default function WishLayout() {
   const themeColorForeground = useThemeColor("foreground");
   const themeColorBackground = useThemeColor("background");
 
   return (
     <Tabs
-      key="main-tabs"
+      key="wish-tabs"
       screenOptions={{
         headerShown: false,
         headerStyle: {
@@ -25,20 +25,20 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="standard"
         options={{
-          title: "Home",
+          title: "standard banner",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="map" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="limited"
         options={{
-          title: "Explore",
+          title: "limited banner",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="compass" size={size} color={color} />
+            <Ionicons name="star" size={size} color={color} />
           ),
         }}
       />
