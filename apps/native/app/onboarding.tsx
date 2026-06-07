@@ -27,7 +27,8 @@ export default function Onboarding() {
 
   const ALL_SLIDES: PageItem[] = [...SLIDES, { key: "auth" }];
   const isAuthSlide = currentIndex === SLIDES.length;
-  const currentAccent = SLIDES[Math.min(currentIndex, SLIDES.length - 1)].accentColor;
+  const currentAccent =
+    SLIDES[Math.min(currentIndex, SLIDES.length - 1)].accentColor;
 
   useEffect(() => {
     if (isAuthSlide && !hasStoredCompletion) {
@@ -53,7 +54,10 @@ export default function Onboarding() {
         setHasStoredCompletion(true);
       });
     }
-    flatListRef.current?.scrollToIndex({ index: SLIDES.length, animated: true });
+    flatListRef.current?.scrollToIndex({
+      index: SLIDES.length,
+      animated: true,
+    });
   };
 
   const onViewableItemsChanged = useRef(
@@ -67,7 +71,7 @@ export default function Onboarding() {
   const renderSlide = ({ item, index }: { item: PageItem; index: number }) => {
     if (item.key === "auth") {
       return (
-        <View style={[styles.pageWrapper, { paddingTop: insets.top }]}> 
+        <View style={[styles.pageWrapper, { paddingTop: insets.top }]}>
           <AuthSlide accentColor={currentAccent} />
         </View>
       );
@@ -76,7 +80,7 @@ export default function Onboarding() {
     const slide = item as (typeof SLIDES)[number];
 
     return (
-      <View style={[styles.pageWrapper, { paddingTop: insets.top }]}> 
+      <View style={[styles.pageWrapper, { paddingTop: insets.top }]}>
         <OnboardingSlide
           slide={slide}
           onNext={goNext}
@@ -89,7 +93,11 @@ export default function Onboarding() {
 
   return (
     <>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <FlatList
         ref={flatListRef}
         data={ALL_SLIDES}
@@ -100,7 +108,11 @@ export default function Onboarding() {
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
-        getItemLayout={(_, index) => ({ length: SCREEN_WIDTH, offset: SCREEN_WIDTH * index, index })}
+        getItemLayout={(_, index) => ({
+          length: SCREEN_WIDTH,
+          offset: SCREEN_WIDTH * index,
+          index,
+        })}
         bounces={false}
         style={styles.flatList}
       />

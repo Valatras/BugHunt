@@ -19,7 +19,10 @@ export function Dots({
             styles.dot,
             index === active
               ? { width: DOT_ACTIVE_WIDTH, backgroundColor: color }
-              : { width: DOT_INACTIVE_WIDTH, backgroundColor: "rgba(255,255,255,0.2)" },
+              : {
+                  width: DOT_INACTIVE_WIDTH,
+                  backgroundColor: "rgba(255,255,255,0.2)",
+                },
             index < count - 1 && styles.dotSpacing,
           ]}
         />

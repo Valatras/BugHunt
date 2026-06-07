@@ -10,7 +10,9 @@ const ONBOARDING_KEY = "onboarding_completed";
 
 export default function Index() {
   const { data: session, isPending } = authClient.useSession();
-  const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(null);
+  const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(
+    null,
+  );
 
   useEffect(() => {
     AsyncStorage.getItem(ONBOARDING_KEY)

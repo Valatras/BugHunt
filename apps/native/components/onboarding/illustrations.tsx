@@ -39,7 +39,7 @@ export function CollectionIllustration() {
       <View style={styles.cardStack}>
         <View style={[styles.card, styles.cardBack]} />
         <View style={[styles.card, styles.cardMiddle]} />
-        <View style={[styles.card, styles.cardFront]}> 
+        <View style={[styles.card, styles.cardFront]}>
           <Text style={styles.cardLabel}>BUG</Text>
         </View>
       </View>

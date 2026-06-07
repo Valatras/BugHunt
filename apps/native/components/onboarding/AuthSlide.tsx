@@ -1,6 +1,13 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { SignIn } from "@/components/sign-in";
 import { SignUp } from "@/components/sign-up";
 import {
@@ -27,7 +34,12 @@ export function AuthSlide({ accentColor }: { accentColor: string }) {
         },
       ]}
     >
-      <View style={[styles.header, { marginBottom: ResponsiveSpacing.sectionMargin }]}>
+      <View
+        style={[
+          styles.header,
+          { marginBottom: ResponsiveSpacing.sectionMargin },
+        ]}
+      >
         <View style={[styles.badge, { borderColor: accentColor }]}>
           <Text style={[styles.badgeText, { color: accentColor }]}>
             BUGHUNT
@@ -36,12 +48,14 @@ export function AuthSlide({ accentColor }: { accentColor: string }) {
         <Text style={[styles.title, { fontSize: ResponsiveFontSize.title }]}>
           Bienvenue dans{"\n"}l'aventure.
         </Text>
-        <Text style={[styles.subtitle, { fontSize: ResponsiveFontSize.subtitle }]}>
+        <Text
+          style={[styles.subtitle, { fontSize: ResponsiveFontSize.subtitle }]}
+        >
           Connecte-toi ou crée un compte pour commencer à gagner des points.
         </Text>
       </View>
 
-      <View style={[styles.tabBar, { borderColor: "rgba(255,255,255,0.08)" }]}> 
+      <View style={[styles.tabBar, { borderColor: "rgba(255,255,255,0.08)" }]}>
         <TouchableOpacity
           style={[
             styles.tabItem,

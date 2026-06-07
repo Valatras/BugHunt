@@ -1,5 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, TouchableOpacity, View, StyleSheet, useWindowDimensions } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
 import { Dots } from "./Dots";
 import type { Slide } from "./slides";
 import {
@@ -22,14 +28,15 @@ export function OnboardingSlide({
   onSkip: () => void;
   isLast: boolean;
 }) {
-  const { accentColor, gradientColors, tag, title, subtitle, Illustration } = slide;
+  const { accentColor, gradientColors, tag, title, subtitle, Illustration } =
+    slide;
   const { height: screenHeight } = useWindowDimensions();
   const illustrationMinHeight = getIllustrationAreaMinHeight();
 
   return (
     <LinearGradient colors={gradientColors} style={styles.screen}>
       <View style={styles.header}>
-        <View style={[styles.tagBadge, { borderColor: accentColor }]}> 
+        <View style={[styles.tagBadge, { borderColor: accentColor }]}>
           <Text style={[styles.tagText, { color: accentColor }]}>{tag}</Text>
         </View>
         <TouchableOpacity onPress={onSkip} activeOpacity={0.75}>
@@ -37,7 +44,9 @@ export function OnboardingSlide({
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.illustrationArea, { minHeight: illustrationMinHeight }]}>
+      <View
+        style={[styles.illustrationArea, { minHeight: illustrationMinHeight }]}
+      >
         <Illustration />
       </View>
 
@@ -85,10 +94,7 @@ export function OnboardingSlide({
           activeOpacity={0.85}
         >
           <Text
-            style={[
-              styles.nextText,
-              { fontSize: ResponsiveFontSize.button },
-            ]}
+            style={[styles.nextText, { fontSize: ResponsiveFontSize.button }]}
           >
             {isLast ? "Commencer" : "Suivant"}
           </Text>
