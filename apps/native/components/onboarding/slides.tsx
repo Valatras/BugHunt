@@ -21,8 +21,8 @@ export const SLIDES: Slide[] = [
     key: "walk",
     accentColor: "#8b5cf6",
     gradientColors: ["#05050f", "#0d0622", "#05050f"],
-    tag: "MARCHE",
-    title: "🚶 Marche dans la vraie vie",
+    tag: "EXPLORE",
+    title: "Explore",
     subtitle:
       "Chaque pas te rapporte des points. Transforme ton activité quotidienne en aventure.",
     Illustration: WalkIllustration,
@@ -31,17 +31,17 @@ export const SLIDES: Slide[] = [
     key: "summon",
     accentColor: "#06b6d4",
     gradientColors: ["#020f18", "#031c2d", "#020f18"],
-    tag: "INVOQUE",
-    title: "🎲 Invoque des insectes",
+    tag: "CAPTURE",
+    title: "🎲 Capture des insectes",
     subtitle:
-      "Utilise tes points pour obtenir des insectes communs, rares ou légendaires.",
+      "Utilise tes points pour obtenir des insectes de différentes raretés.",
     Illustration: SummonIllustration,
   },
   {
     key: "collection",
     accentColor: "#22c55e",
     gradientColors: ["#05140a", "#0b2515", "#05140a"],
-    tag: "COLLECTION",
+    tag: "COLLECTIONNE",
     title: "📚 Complète ta collection",
     subtitle:
       "Découvre des centaines d'espèces et remplis ton encyclopédie personnelle.",
@@ -52,7 +52,7 @@ export const SLIDES: Slide[] = [
     accentColor: "#f59e0b",
     gradientColors: ["#1a1200", "#291b04", "#1a1200"],
     tag: "PROGRESSION",
-    title: "🏆 Progresse",
+    title: "🏆 Progresse en tant que chasseur",
     subtitle:
       "Débloque des badges, atteins des objectifs et deviens un expert.",
     Illustration: ProgressIllustration,
