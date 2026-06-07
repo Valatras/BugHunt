@@ -25,6 +25,31 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
+        name="two"
+        options={{
+          title: "Explore",
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Ionicons name="compass" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="(wish)"
+        options={{
+          headerTitle: "hunt",
+          tabBarLabel: ({ color, focused }) => 0,
+          tabBarIcon: ({ size, color, focused }) => (
+            <Ionicons
+              name="cube"
+              size={size}
+              color={focused ? color : themeColorForeground}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
         name="index"
         options={{
           title: "Home",
@@ -33,12 +58,23 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name="two"
+        name="insects"
         options={{
-          title: "Explore",
+          title: "My Collection",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="compass" size={size} color={color} />
+            <Ionicons name="bug" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="dashboard"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />

@@ -27,8 +27,10 @@ export default function Home() {
     router.push("/sign-in");
   };
 
+  const handleSignIn = handleGetStarted;
+
   const handleMyCollection = () => {
-    router.push("/(drawer)/insects");
+    router.push("/(tabs)/insects");
   };
 
   const handleSignUp = () => {
@@ -146,7 +148,13 @@ export default function Home() {
         </View>
 
         {/* CALL TO ACTION - Si non connecté */}
-        {!session?.user && <CallToActionSection onSignUp={handleSignUp} />}
+        {!session?.user && (
+          <CallToActionSection
+            onSignUp={handleSignUp}
+            onSignIn={handleSignIn}
+            isLoading={healthCheck?.isLoading || false}
+          />
+        )}
       </Container>
 
       {/* FOOTER */}

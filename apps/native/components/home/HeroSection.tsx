@@ -31,14 +31,13 @@ export function HeroSection({
         isScrollable={false}
         className="h-full justify-center items-center px-6 relative z-10"
       >
-        {/* Logo/Icon */}
-        <View className="mb-6 bg-primary/20 p-6 rounded-full">
-          <Ionicons name="bug" size={56} color={foregroundColor} />
-        </View>
-
         {/* Title */}
         <Text className="text-4xl md:text-5xl font-bold text-foreground text-center mb-3">
-          Bughunt
+          {/* Logo/Icon */}
+          <View className="mb-6 bg-primary/20 p-6 rounded-full">
+            <Ionicons name="bug" size={56} color={foregroundColor} />
+            Bughunt
+          </View>
         </Text>
 
         {/* Subtitle */}
@@ -47,7 +46,7 @@ export function HeroSection({
           insectes
         </Text>
 
-        {/* CTA Button */}
+        {/* CTA Button
         {!isLoading && (
           <Pressable
             className="bg-primary py-3 md:py-4 px-8 rounded-full active:opacity-80 flex-row items-center"
@@ -60,10 +59,10 @@ export function HeroSection({
               style={{ marginRight: 8 }}
             />
             <Text className="text-foreground font-semibold text-base md:text-lg">
-              {session?.user ? "Ma Collection" : "Commencer l'aventure"}
+              {session?.user ? "Ma Collection" : "Commencer l'"}
             </Text>
           </Pressable>
-        )}
+        )} */}
       </Container>
     </View>
   );
