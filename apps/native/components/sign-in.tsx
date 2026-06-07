@@ -11,14 +11,22 @@ import {
 } from "heroui-native";
 import { useRef } from "react";
 import { Text, TextInput, View } from "react-native";
+import { useRouter } from "expo-router";
 import z from "zod";
 
 import { authClient } from "@/lib/auth-client";
 import { queryClient } from "@/utils/orpc";
 
 const signInSchema = z.object({
-  email: z.string().trim().min(1, "Email is required").email("Enter a valid email address"),
-  password: z.string().min(1, "Password is required").min(8, "Use at least 8 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Enter a valid email address"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(8, "Use at least 8 characters"),
 });
 
 function getErrorMessage(error: unknown): string | null {
@@ -51,6 +59,7 @@ function getErrorMessage(error: unknown): string | null {
 function SignIn() {
   const passwordInputRef = useRef<TextInput>(null);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -70,16 +79,17 @@ function SignIn() {
           onError(error) {
             toast.show({
               variant: "danger",
-              label: error.error?.message || "Failed to sign in",
+              label: error.error?.message || "Échec de la connexion",
             });
           },
           onSuccess() {
             formApi.reset();
+            queryClient.refetchQueries();
             toast.show({
               variant: "success",
-              label: "Signed in successfully",
+              label: "Bienvenue ! Vous êtes connecté.",
             });
-            queryClient.refetchQueries();
+            router.replace("/(tabs)");
           },
         },
       );
@@ -87,81 +97,83 @@ function SignIn() {
   });
 
   return (
-    <Surface variant="secondary" className="p-4 rounded-lg">
-      <Text className="text-foreground font-medium mb-4">Sign In</Text>
+    <form.Subscribe
+      selector={(state) => ({
+        isSubmitting: state.isSubmitting,
+        validationError: getErrorMessage(state.errorMap.onSubmit),
+      })}
+    >
+      {({ isSubmitting, validationError }) => {
+        const formError = validationError;
 
-      <form.Subscribe
-        selector={(state) => ({
-          isSubmitting: state.isSubmitting,
-          validationError: getErrorMessage(state.errorMap.onSubmit),
-        })}
-      >
-        {({ isSubmitting, validationError }) => {
-          const formError = validationError;
+        return (
+          <>
+            <FieldError isInvalid={!!formError} className="mb-3">
+              {formError}
+            </FieldError>
 
-          return (
-            <>
-              <FieldError isInvalid={!!formError} className="mb-3">
-                {formError}
-              </FieldError>
+            <View className="gap-3">
+              <form.Field name="email">
+                {(field) => (
+                  <TextField>
+                    <Label>Email</Label>
+                    <Input
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChangeText={field.handleChange}
+                      placeholder="email@example.com"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      textContentType="emailAddress"
+                      returnKeyType="next"
+                      onSubmitEditing={() => {
+                        passwordInputRef.current?.focus();
+                      }}
+                    />
+                  </TextField>
+                )}
+              </form.Field>
 
-              <View className="gap-3">
-                <form.Field name="email">
-                  {(field) => (
-                    <TextField>
-                      <Label>Email</Label>
-                      <Input
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChangeText={field.handleChange}
-                        placeholder="email@example.com"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        autoComplete="email"
-                        textContentType="emailAddress"
-                        returnKeyType="next"
-                        blurOnSubmit={false}
-                        onSubmitEditing={() => {
-                          passwordInputRef.current?.focus();
-                        }}
-                      />
-                    </TextField>
-                  )}
-                </form.Field>
+              <form.Field name="password">
+                {(field) => (
+                  <TextField>
+                    <Label>Password</Label>
+                    <Input
+                      ref={passwordInputRef}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChangeText={field.handleChange}
+                      placeholder="••••••••"
+                      secureTextEntry
+                      autoComplete="password"
+                      textContentType="password"
+                      returnKeyType="go"
+                      onSubmitEditing={form.handleSubmit}
+                    />
+                  </TextField>
+                )}
+              </form.Field>
 
-                <form.Field name="password">
-                  {(field) => (
-                    <TextField>
-                      <Label>Password</Label>
-                      <Input
-                        ref={passwordInputRef}
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChangeText={field.handleChange}
-                        placeholder="••••••••"
-                        secureTextEntry
-                        autoComplete="password"
-                        textContentType="password"
-                        returnKeyType="go"
-                        onSubmitEditing={form.handleSubmit}
-                      />
-                    </TextField>
-                  )}
-                </form.Field>
-
-                <Button onPress={form.handleSubmit} isDisabled={isSubmitting} className="mt-1">
-                  {isSubmitting ? (
+              <Button
+                onPress={form.handleSubmit}
+                isDisabled={isSubmitting}
+                className="mt-1"
+              >
+                {isSubmitting ? (
+                  <View className="flex-row items-center justify-center gap-2">
                     <Spinner size="sm" color="default" />
-                  ) : (
-                    <Button.Label>Sign In</Button.Label>
-                  )}
-                </Button>
-              </View>
-            </>
-          );
-        }}
-      </form.Subscribe>
-    </Surface>
+                    <Button.Label>Connexion...</Button.Label>
+                  </View>
+                ) : (
+                  <Button.Label>Se connecter</Button.Label>
+                )}
+              </Button>
+            </View>
+          </>
+        );
+      }}
+    </form.Subscribe>
   );
 }
 
