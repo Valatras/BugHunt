@@ -25,7 +25,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="two"
+        name="map"
         options={{
           title: "Explore",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
@@ -37,8 +37,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(wish)"
         options={{
+          title: "hunt",
           headerTitle: "hunt",
-          tabBarLabel: ({ color, focused }) => 0,
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
               name="cube"
