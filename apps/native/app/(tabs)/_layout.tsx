@@ -1,10 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
 import { useThemeColor } from "heroui-native";
+import { authClient } from "@/lib/auth-client";
 
 export default function TabLayout() {
   const themeColorForeground = useThemeColor("foreground");
   const themeColorBackground = useThemeColor("background");
+  const { data: session, isPending } = authClient.useSession();
+
+  if (isPending) {
+    return null;
+  }
+
+  if (!session?.user) {
+    return <Redirect href="/sign-in" />;
+  }
 
   return (
     <Tabs

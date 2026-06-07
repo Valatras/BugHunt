@@ -11,24 +11,35 @@ export default function SignUpModal() {
   const foregroundColor = useThemeColor("foreground");
 
   return (
-    <ScrollView className="flex-1 bg-background">
-      <Container className="px-6 py-8">
-        {/* Header with close button */}
-        <View className="flex-row items-center justify-between mb-6">
-          <Text className="text-2xl font-bold text-foreground">
-            Créer un compte
-          </Text>
-          <Pressable
-            onPress={() => router.back()}
-            className="bg-muted/20 p-2 rounded-full active:opacity-70"
-          >
-            <Ionicons name="close" size={24} color={foregroundColor} />
-          </Pressable>
-        </View>
+    <Container className="px-6 py-8">
+      {/* Header */}
+      <View className="flex-row items-center justify-between mb-6">
+        <Text className="text-2xl font-bold text-foreground">
+          Créer un compte
+        </Text>
+      </View>
 
-        {/* Sign Up Form */}
-        <SignUp />
-      </Container>
-    </ScrollView>
+      {/* Sign Up Form */}
+      <SignUp />
+
+      {/* Footer with Sign In Link */}
+      <View className="flex-row items-center justify-center mt-6">
+        <Text className="text-muted text-sm mr-2">
+          Vous avez déjà un compte?
+        </Text>
+        <Pressable
+          onPress={() => router.push("/sign-in")}
+          className="flex-row items-center active:opacity-70"
+        >
+          <Ionicons
+            name="arrow-forward"
+            size={16}
+            color={foregroundColor}
+            style={{ marginRight: 4 }}
+          />
+          <Text className="text-primary font-medium text-sm">Se connecter</Text>
+        </Pressable>
+      </View>
+    </Container>
   );
 }
