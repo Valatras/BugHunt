@@ -1,3 +1,9 @@
+
+// difference between user, session, account, and verification is as follows:
+// - user: represents a user in the system, with their basic information and relationships to sessions and accounts
+// - session: represents a user's session, with information about when it expires, the token, and the user's IP address and user agent
+// - account: represents a user's account with a specific provider (e.g. Google, Facebook), with information about access tokens, refresh tokens, and scopes
+// - verification: represents a verification request for a user, with information about the identifier (e.g. email), the value (e.g. verification code), and when it expires
 model User {
   id            String    @id
   name          String
