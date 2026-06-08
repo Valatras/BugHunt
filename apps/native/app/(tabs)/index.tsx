@@ -1,178 +1,190 @@
 import { useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { useThemeColor } from "heroui-native";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, Pressable } from "react-native";
 
 import { Container } from "@/components/container";
 import { authClient } from "@/lib/auth-client";
 import { orpc } from "@/utils/orpc";
+
 import { HeroSection } from "@/components/home/HeroSection";
-import { StatisticsCard } from "@/components/home/StatisticsCard";
 import { FeaturedInsectsSection } from "@/components/home/FeaturedInsectsSection";
-import { FeatureCard } from "@/components/home/FeatureCard";
-import { CategoryCard } from "@/components/home/CategoryCard";
-import { CallToActionSection } from "@/components/home/CallToActionSection";
 
 export default function Home() {
   const router = useRouter();
-  const foregroundColor = useThemeColor("foreground");
-
-  // Queries
-  const healthCheck = useQuery(orpc.healthCheck.queryOptions());
   const { data: session } = authClient.useSession();
+
+  // =========================
+  // DATA
+  // =========================
   const featured = useQuery(orpc.insect.getFeatured.queryOptions());
 
-  // Handlers
-  const handleGetStarted = () => {
-    router.push("/sign-in");
-  };
+  const userStats = useQuery({
+    ...orpc.user.getStats.queryOptions(),
+    enabled: !!session?.user,
+  });
 
-  const handleSignIn = handleGetStarted;
+  const recentInsects = useQuery({
+    ...orpc.userInsect.getRecent.queryOptions(),
+    enabled: !!session?.user,
+  });
 
-  const handleMyCollection = () => {
-    router.push("/(tabs)/insects");
-  };
+  // =========================
+  // HANDLERS
+  // =========================
+  const goToCollection = () => router.push("/(tabs)/insects");
+  const goToLeaderboard = () => router.push("/");
+  const goToRewards = () => router.push("/");
+  const goToInsect = (id: number) => router.push("/" /*`/insect/${id}`*/);
 
-  const handleSignUp = () => {
-    router.push("/sign-up");
-  };
+  // =========================
+  // GUEST VIEW
+  // =========================
+  if (!session?.user) {
+    return (
+      <ScrollView className="flex-1 bg-background">
+        <HeroSection
+          session={null}
+          isConnected={true}
+          isLoading={false}
+          onGetStarted={() => router.push("/sign-up")}
+          onMyCollection={() => router.push("/sign-in")}
+        />
 
-  const handleInsectPress = (id: number) => {
-    // TODO: Navigate to insect detail page
-    console.log("Navigate to insect:", id);
-  };
+        <Container className="px-6 py-8">
+          <Text className="text-xl font-bold text-foreground mb-3">
+            Découvre Bughunt
+          </Text>
 
-  const handleCategoryPress = (category: string) => {
-    // TODO: Navigate to category page
-    console.log("Navigate to category:", category);
-  };
+          <Text className="text-muted mb-6">
+            Capture, collectionne et apprends sur les insectes autour de toi.
+          </Text>
+
+          <Pressable
+            onPress={() => router.push("/sign-up")}
+            className="bg-primary p-4 rounded-xl"
+          >
+            <Text className="text-white text-center font-semibold">
+              Commencer maintenant
+            </Text>
+          </Pressable>
+        </Container>
+      </ScrollView>
+    );
+  }
+
+  // =========================
+  // LOADING GUARD
+  // =========================
+  const stats = userStats.data;
+  const featuredInsects = featured.data ?? [];
+  const recent = recentInsects.data ?? [];
 
   return (
     <ScrollView className="flex-1 bg-background">
-      {/* HERO SECTION */}
+      {/* HEADER DASHBOARD */}
       <HeroSection
         session={session}
-        isConnected={healthCheck?.data === "OK"}
-        isLoading={healthCheck?.isLoading || false}
-        onGetStarted={handleGetStarted}
-        onMyCollection={handleMyCollection}
+        isConnected={true}
+        isLoading={false}
+        onGetStarted={goToRewards}
+        onMyCollection={goToCollection}
       />
 
-      <Container className="px-6 py-8">
-        {/* STATISTICS SECTION - Si connecté */}
-        {session?.user && (
-          <StatisticsCard
-            userName={session.user.name}
-            collected={24}
-            total={156}
-            percentage={15}
-            onSignOut={() => authClient.signOut()}
-          />
-        )}
+      <Container className="px-6 py-6">
+        {/* =========================
+            STATS USER
+        ========================= */}
+        <View className="bg-muted/10 p-4 rounded-2xl mb-6">
+          <Text className="text-lg font-bold text-foreground mb-2">
+            Bonjour {session.user.name}
+          </Text>
 
-        {/* FEATURED INSECTS SECTION */}
+          <View className="flex-row justify-between">
+            <View>
+              <Text className="text-muted text-sm">Points</Text>
+              <Text className="text-2xl font-bold text-primary">
+                {stats?.points ?? 0}
+              </Text>
+            </View>
+
+            <View>
+              <Text className="text-muted text-sm">Insectes</Text>
+              <Text className="text-2xl font-bold text-foreground">
+                {stats?.collected ?? 0}
+              </Text>
+            </View>
+
+            <View>
+              <Text className="text-muted text-sm">Complétion</Text>
+              <Text className="text-2xl font-bold text-foreground">
+                {stats?.completion ?? 0}%
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* =========================
+            ACTIONS RAPIDES
+        ========================= */}
+        <View className="flex-row gap-3 mb-6">
+          <Pressable
+            onPress={goToCollection}
+            className="flex-1 bg-primary p-4 rounded-xl"
+          >
+            <Text className="text-white text-center font-semibold">
+              Ma collection
+            </Text>
+          </Pressable>
+
+          <Pressable
+            onPress={goToRewards}
+            className="flex-1 bg-muted/20 p-4 rounded-xl"
+          >
+            <Text className="text-foreground text-center font-semibold">
+              Récompenses
+            </Text>
+          </Pressable>
+        </View>
+
+        {/* =========================
+            FEATURED INSECTS
+        ========================= */}
         <FeaturedInsectsSection
-          insects={featured?.data}
-          isLoading={featured?.isLoading || false}
-          onInsectPress={handleInsectPress}
+          insects={featuredInsects}
+          isLoading={featured.isLoading}
+          onInsectPress={goToInsect}
         />
 
-        {/* FEATURES SECTION */}
-        <View className="mb-8">
-          <Text className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-            Fonctionnalités
+        {/* =========================
+            RECENT ACTIVITY
+        ========================= */}
+        <View className="mt-8">
+          <Text className="text-xl font-bold text-foreground mb-4">
+            Activité récente
           </Text>
 
-          <FeatureCard
-            icon="document-text"
-            title="Fiches détaillées"
-            description="Chaque insecte possède une fiche complète avec des informations scientifiques, son habitat, son régime alimentaire et bien plus encore."
-            color="#3b82f6"
-          />
-
-          <FeatureCard
-            icon="albums"
-            title="Votre collection"
-            description="Collectionnez vos insectes préférés, suivez votre progression et débloquez des badges spéciaux en complétant des catégories."
-            color="#10b981"
-          />
-
-          <FeatureCard
-            icon="school"
-            title="Apprentissage ludique"
-            description="Découvrez des faits fascinants, participez à des quiz et devenez un expert en entomologie de manière amusante."
-            color="#fbbf24"
-          />
+          {recent.length === 0 ? (
+            <Text className="text-muted">
+              Tu n’as pas encore capturé d’insectes.
+            </Text>
+          ) : (
+            recent.map((item) => (
+              <Pressable
+                key={item.id}
+                onPress={() => goToInsect(item.insectId)}
+                className="p-3 mb-2 bg-muted/10 rounded-xl"
+              >
+                <Text className="text-foreground font-medium">
+                  Insecte #{item.insectId}
+                </Text>
+                <Text className="text-muted text-sm">
+                  x{item.quantity} capturé(s)
+                </Text>
+              </Pressable>
+            ))
+          )}
         </View>
-
-        {/* CATEGORIES SECTION */}
-        <View className="mb-8">
-          <Text className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-            Explorer par catégorie
-          </Text>
-
-          <View className="flex-row flex-wrap gap-3">
-            <View className="w-[calc(50%-6px)]">
-              <CategoryCard
-                name="Papillons"
-                icon="rose"
-                color="#ec4899"
-                onPress={() => handleCategoryPress("papillons")}
-              />
-            </View>
-            <View className="w-[calc(50%-6px)]">
-              <CategoryCard
-                name="Coléoptères"
-                icon="shield"
-                color="#8b5cf6"
-                onPress={() => handleCategoryPress("coleopteres")}
-              />
-            </View>
-            <View className="w-[calc(50%-6px)]">
-              <CategoryCard
-                name="Abeilles"
-                icon="cellular"
-                color="#f59e0b"
-                onPress={() => handleCategoryPress("abeilles")}
-              />
-            </View>
-            <View className="w-[calc(50%-6px)]">
-              <CategoryCard
-                name="Libellules"
-                icon="water"
-                color="#06b6d4"
-                onPress={() => handleCategoryPress("libellules")}
-              />
-            </View>
-          </View>
-        </View>
-
-        {/* CALL TO ACTION - Si non connecté */}
-        {!session?.user && (
-          <CallToActionSection
-            onSignUp={handleSignUp}
-            onSignIn={handleSignIn}
-            isLoading={healthCheck?.isLoading || false}
-          />
-        )}
       </Container>
-
-      {/* FOOTER */}
-      <View className="bg-muted/10 py-8 mt-8">
-        <Container isScrollable={false} className="px-6">
-          <View className="items-center">
-            <Text className="text-foreground font-semibold text-lg mb-2">
-              Bughunt
-            </Text>
-            <Text className="text-muted text-sm text-center mb-4">
-              Votre guide interactif du monde des insectes
-            </Text>
-            <Text className="text-muted text-xs">
-              © 2025 - Tous droits réservés
-            </Text>
-          </View>
-        </Container>
-      </View>
     </ScrollView>
   );
 }
