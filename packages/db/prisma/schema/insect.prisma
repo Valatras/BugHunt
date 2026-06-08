@@ -9,10 +9,27 @@ enum Rarity {
 
 model Insect {
 
-    id          Int     @id @default(autoincrement())
+    id         Int     @id @default(autoincrement())
     name        String  
-    Sci_Name    String
+    sciName    String
 
     featured   Boolean @default(false)
     rarity     Rarity @default(Commun)
+
+    userInsects UserInsect[]
+}
+
+model UserInsect {
+
+    id Int @id @default(autoincrement())
+
+    userId String
+    insectId Int
+
+    quantity Int @default(1)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    insect Insect @relation(fields: [insectId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, insectId])
 }

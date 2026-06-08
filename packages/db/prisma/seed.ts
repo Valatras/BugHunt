@@ -13,6 +13,9 @@ import {
   type Session,
   type Verification,
   type Todo,
+  type DailySteps,
+  type UserInsect,
+  type PointTransaction,
   Rarity,
 } from "./generated/client";
 
@@ -22,38 +25,152 @@ const prisma = new PrismaClient({ adapter });
 // ============================================
 // DONNÉES D'INSECTES
 // ============================================
-
 const insects: Insect[] = [
+  // COMMUNS
+
   {
     id: 1,
     name: "Coccinelle",
-    Sci_Name: "Coccinella septempunctata",
+    sciName: "Coccinella septempunctata",
     featured: true,
     rarity: Rarity.Commun,
   },
   {
     id: 2,
+    name: "Fourmi noire",
+    sciName: "Lasius niger",
+    featured: false,
+    rarity: Rarity.Commun,
+  },
+  {
+    id: 3,
+    name: "Abeille domestique",
+    sciName: "Apis mellifera",
+    featured: true,
+    rarity: Rarity.Commun,
+  },
+  {
+    id: 4,
+    name: "Criquet migrateur",
+    sciName: "Locusta migratoria",
+    featured: false,
+    rarity: Rarity.Commun,
+  },
+  {
+    id: 5,
+    name: "Gendarme",
+    sciName: "Pyrrhocoris apterus",
+    featured: false,
+    rarity: Rarity.Commun,
+  },
+  {
+    id: 6,
+    name: "Mouche domestique",
+    sciName: "Musca domestica",
+    featured: false,
+    rarity: Rarity.Commun,
+  },
+
+  // RARES
+
+  {
+    id: 7,
     name: "Papillon Monarque",
-    Sci_Name: "Danaus plexippus",
+    sciName: "Danaus plexippus",
+    featured: true,
+    rarity: Rarity.Rare,
+  },
+  {
+    id: 8,
+    name: "Libellule bleue",
+    sciName: "Calopteryx virgo",
+    featured: true,
+    rarity: Rarity.Rare,
+  },
+  {
+    id: 9,
+    name: "Bourdon terrestre",
+    sciName: "Bombus terrestris",
     featured: false,
     rarity: Rarity.Rare,
   },
   {
-    id: 3,
+    id: 10,
+    name: "Phasme gaulois",
+    sciName: "Clonopsis gallica",
+    featured: false,
+    rarity: Rarity.Rare,
+  },
+  {
+    id: 11,
+    name: "Cétoine dorée",
+    sciName: "Cetonia aurata",
+    featured: false,
+    rarity: Rarity.Rare,
+  },
+
+  // ÉPIQUES
+
+  {
+    id: 12,
     name: "Scarabée Rhinocéros",
-    Sci_Name: "Oryctes nasicornis",
+    sciName: "Oryctes nasicornis",
     featured: true,
     rarity: Rarity.Epique,
   },
   {
-    id: 4,
+    id: 13,
+    name: "Lucane Cerf-volant",
+    sciName: "Lucanus cervus",
+    featured: true,
+    rarity: Rarity.Epique,
+  },
+  {
+    id: 14,
+    name: "Grand Paon de Nuit",
+    sciName: "Saturnia pyri",
+    featured: false,
+    rarity: Rarity.Epique,
+  },
+  {
+    id: 15,
+    name: "Rosalie des Alpes",
+    sciName: "Rosalia alpina",
+    featured: false,
+    rarity: Rarity.Epique,
+  },
+
+  // LÉGENDAIRES
+
+  {
+    id: 16,
     name: "Mante Religieuse",
-    Sci_Name: "Mantis religiosa",
+    sciName: "Mantis religiosa",
+    featured: true,
+    rarity: Rarity.Legendaire,
+  },
+  {
+    id: 17,
+    name: "Atlas géant",
+    sciName: "Attacus atlas",
+    featured: true,
+    rarity: Rarity.Legendaire,
+  },
+  {
+    id: 18,
+    name: "Goliath géant",
+    sciName: "Goliathus goliatus",
+    featured: false,
+    rarity: Rarity.Legendaire,
+  },
+  {
+    id: 19,
+    name: "Papillon Reine Alexandra",
+    sciName: "Ornithoptera alexandrae",
     featured: false,
     rarity: Rarity.Legendaire,
   },
 ];
-
 // ============================================
 // DONNÉES D'UTILISATEURS
 // ============================================
@@ -65,6 +182,7 @@ const users: User[] = [
     email: "alice@example.com",
     emailVerified: true,
     image: "https://example.com/alice.jpg",
+    points: 1250,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -74,6 +192,7 @@ const users: User[] = [
     email: "bob@example.com",
     emailVerified: false,
     image: "https://example.com/bob.jpg",
+    points: 340,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -184,8 +303,109 @@ const todos: Todo[] = [
 ];
 
 // ============================================
+// DONNÉES DE POINTS
+// ============================================
+
+const dailySteps: DailySteps[] = [
+  {
+    id: 1,
+    userId: "1",
+    date: new Date("2026-06-01"),
+    steps: 8234,
+  },
+  {
+    id: 2,
+    userId: "1",
+    date: new Date("2026-06-02"),
+    steps: 10125,
+  },
+  {
+    id: 3,
+    userId: "2",
+    date: new Date("2026-06-01"),
+    steps: 4210,
+  },
+];
+
+const pointTransactions: PointTransaction[] = [
+  {
+    id: 1,
+    userId: "1",
+    amount: 500,
+    reason: "reward for steps",
+    createdAt: new Date(),
+  },
+  {
+    id: 2,
+    userId: "1",
+    amount: -100,
+    reason: "summoning insect",
+    createdAt: new Date(),
+  },
+  {
+    id: 3,
+    userId: "1",
+    amount: 850,
+    reason: "reward for steps",
+    createdAt: new Date(), 
+  },
+  {
+    id: 4,
+    userId: "2",
+    amount: 340,
+    reason: "reward for steps",
+    createdAt: new Date(),
+  },
+];
+
+// ============================================
+// DONNÉES DE USER INSECTS (COLLECTIONS)
+// ============================================
+
+const userInsects: UserInsect[] = [
+  {
+    id: 1,
+    userId: "1",
+    insectId: 1,
+    quantity: 12,
+  },
+  {
+    id: 2,
+    userId: "1",
+    insectId: 2,
+    quantity: 5,
+  },
+  {
+    id: 3,
+    userId: "1",
+    insectId: 12,
+    quantity: 1,
+  },
+  {
+    id: 4,
+    userId: "1",
+    insectId: 16,
+    quantity: 1,
+  },
+  {
+    id: 5,
+    userId: "2",
+    insectId: 1,
+    quantity: 2,
+  },
+  {
+    id: 6,
+    userId: "2",
+    insectId: 8,
+    quantity: 1,
+  },
+];
+
+
+// ============================================
 // FONCTION PRINCIPALE DE SEEDING
 // ============================================
+
 
 async function main() {
   await prisma.insect.createMany({ data: insects });
@@ -194,6 +414,10 @@ async function main() {
   await prisma.session.createMany({ data: sessions });
   await prisma.verification.createMany({ data: verifications });
   await prisma.todo.createMany({ data: todos });
+  await prisma.dailySteps.createMany({ data: dailySteps });
+  await prisma.pointTransaction.createMany({ data: pointTransactions });
+  await prisma.userInsect.createMany({ data: userInsects });
+  console.log("Database seeded successfully!");
 }
 
 main()

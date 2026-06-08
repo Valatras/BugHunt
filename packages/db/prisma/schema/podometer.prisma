@@ -1,0 +1,32 @@
+
+
+model DailySteps {
+    id Int @id @default(autoincrement())
+
+    userId String
+
+    date DateTime
+
+    steps Int
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, date])
+}
+
+model PointTransaction {
+
+    id Int @id @default(autoincrement())
+
+    userId String
+
+    amount Int
+
+    // ex : "reward for steps, summoning insect, etc..."
+    reason String
+
+    
+    createdAt DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
