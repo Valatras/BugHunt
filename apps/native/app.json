@@ -6,12 +6,22 @@
     "web": {
       "bundler": "metro"
     },
+        "android": {
+      "usesCleartextTraffic": true
+    },
+
     "name": "my-better-t-app",
     "slug": "my-better-t-app",
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      "expo-router",
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
     }
+
   }
 }
