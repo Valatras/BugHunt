@@ -1,99 +1,144 @@
-# my-better-t-app
+# Bughunt
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, TanStack Start, Self, ORPC, and more.
+Bughunt est une application web et mobile de collecte et d'identification d'insectes.
 
-## Features
+Les utilisateurs peuvent :
 
-- **TypeScript** - For type safety and improved developer experience
-- **TanStack Start** - SSR framework with TanStack Router
-- **React Native** - Build mobile apps using React
-- **Expo** - Tools for React Native development
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **Shared UI package** - shadcn/ui primitives live in `packages/ui`
-- **oRPC** - End-to-end type-safe APIs with OpenAPI integration
-- **Prisma** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
-- **Authentication** - Better-Auth
-- **Turborepo** - Optimized monorepo build system
+* Découvrir différentes espèces d'insectes
+* Consulter leurs caractéristiques et informations biologiques
+* Compléter leur collection personnelle
+* Gagner des points en découvrant de nouvelles espèces
+* Suivre leur progression
+* Utiliser l'application depuis le web ou un appareil mobile
 
-## Getting Started
+Le projet est développé dans le cadre du cours de Développement Web et Mobile.
 
-First, install the dependencies:
+## Technologies utilisées
+
+### Frontend
+
+* React
+* TanStack Start
+* React Native
+* Expo
+* TailwindCSS
+
+### Backend
+
+* TypeScript
+* oRPC
+* Better Auth
+* Prisma ORM
+* PostgreSQL
+
+### Infrastructure
+
+* Docker
+* Docker Compose
+* Turborepo
+
+---
+
+# Installation
+
+## Prérequis
+
+* Git
+* Node.js (version LTS recommandée)
+* pnpm
+* Docker
+* Docker Compose
+
+## Cloner le projet
+
+```bash
+git clone https://github.com/Valatras/BugHunt.git
+```
+
+## Installer les dépendances
+
+Depuis la racine du projet :
 
 ```bash
 pnpm install
 ```
 
-## Database Setup
+## Démarrer l'environnement complet
 
-This project uses PostgreSQL with Prisma.
-
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/web/.env` file with your PostgreSQL connection details.
-
-3. Apply the schema to your database:
 
 ```bash
-pnpm run db:push
+docker compose up --build
 ```
 
-Then, run the development server:
+Cette commande démarre :
+
+* Le backend
+* Le frontend web
+* La base de données PostgreSQL
+* Les services nécessaires au fonctionnement du projet
+
+Lors des démarrages suivants :
 
 ```bash
-pnpm run dev
+docker compose up
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the fullstack application.
-Use the Expo Go app to run the mobile application.
+suffit généralement. On peut maintenant utiliser les applications web et mobile.
 
-## UI Customization
+---
 
-React web apps in this stack share shadcn/ui primitives through `packages/ui`.
+# Accès à l'application
 
-- Change design tokens and global styles in `packages/ui/src/styles/globals.css`
-- Update shared primitives in `packages/ui/src/components/*`
-- Adjust shadcn aliases or style config in `packages/ui/components.json` and `apps/web/components.json`
+Une fois les conteneurs démarrés, on trouve les applications aux adresses suivantes :
 
-### Add more shared components
+Web :
 
-Run this from the project root to add more primitives to the shared UI package:
+```text
+http://localhost:3001
+```
+
+Mobile (Expo) :
+
+```text
+http://localhost:8081
+```
+
+
+---
+
+# Base de données
+
+Le projet utilise PostgreSQL avec Prisma.
+
+Les migrations et le schéma Prisma sont gérés automatiquement par l'environnement Docker.
+
+Si nécessaire :
 
 ```bash
-npx shadcn@latest add accordion dialog popover sheet table -c packages/ui
+pnpm db:generate # pour générer le client Prisma
+pnpm db:push # après que le docker compose ait démarré
+pnpm db:reset # si besoin de réinitialiser la base de données
+pnpm db:studio # pour accéder à Prisma Studio
+pnpm db:seed # pour insérer des données de test
 ```
 
-Import shared components like this:
+---
 
-```tsx
-import { Button } from "@my-better-t-app/ui/components/button";
-```
+# Structure du projet
 
-### Add app-specific blocks
-
-If you want to add app-specific blocks instead of shared primitives, run the shadcn CLI from `apps/web`.
-
-## Project Structure
-
-```
-my-better-t-app/
+```text
+bughunt/
 ├── apps/
-│   └── web/         # Fullstack application (React + TanStack Start)
-│   ├── native/      # Mobile application (React Native, Expo)
+│   ├── web/              # Application web
+│   └── native/           # Application mobile Expo
+│
 ├── packages/
-│   ├── ui/          # Shared shadcn/ui components and styles
-│   ├── api/         # API layer / business logic
-│   ├── auth/        # Authentication configuration & logic
-│   └── db/          # Database schema & queries
+│   ├── api/              # Logique métier et API
+│   ├── auth/             # Authentification
+│   ├── db/               # Prisma et accès aux données
+│   └── ui/               # Composants partagés
+│
+├── docker-compose.yml
+└── README.md
 ```
 
-## Available Scripts
-
-- `pnpm run dev`: Start all applications in development mode
-- `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
-- `pnpm run check-types`: Check TypeScript types across all apps
-- `pnpm run dev:native`: Start the React Native/Expo development server
-- `pnpm run db:push`: Push schema changes to database
-- `pnpm run db:generate`: Generate database client/types
-- `pnpm run db:migrate`: Run database migrations
-- `pnpm run db:studio`: Open database studio UI
