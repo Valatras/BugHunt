@@ -9,8 +9,8 @@ services:
     environment:
       - NODE_ENV=development
       - BETTER_AUTH_SECRET=hJk6wBhqmblvd2UpfYMvuB7OVJncr1RA
-      - BETTER_AUTH_URL=http://localhost:3001
-      - CORS_ORIGIN=http://localhost:3001
+      - BETTER_AUTH_URL=http://100.111.244.51:3001
+      - CORS_ORIGIN=http://100.111.244.51:3001
       - DATABASE_URL=postgres://postgres:password@postgres:5432/bughunt
     depends_on:
       postgres:
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=development
-      - EXPO_PUBLIC_SERVER_URL=http://localhost:3001
+      - EXPO_PUBLIC_SERVER_URL=http://100.111.244.51:3001
     depends_on:
       web:
         condition: service_started

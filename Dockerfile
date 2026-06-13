@@ -4,7 +4,7 @@ FROM node:22-bookworm-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-ENV CI="true"
+ENV CI="false"
 ENV NODE_ENV="development"
 ENV EXPO_NO_TELEMETRY="1"
 
@@ -25,4 +25,4 @@ CMD ["pnpm", "--filter", "web", "dev"]
 FROM app AS mobile
 
 EXPOSE 8081
-CMD ["pnpm", "--filter", "native", "start", "--", "--host", "lan", "--port", "8081"]
+CMD ["pnpm", "run", "dev:native"]

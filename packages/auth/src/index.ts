@@ -17,7 +17,14 @@ export function createAuth() {
       env.CORS_ORIGIN,
       "my-better-t-app://",
       ...(env.NODE_ENV === "development"
-        ? ["exp://", "exp://**", "exp://192.168.*.*:*/**", "http://localhost:8081"]
+        ? [
+            "exp://",
+            "exp://**",
+            "exp://192.168.*.*:*/**",
+            "http://localhost:8081",
+            "http://127.0.0.1:8081",
+            "http://100.111.244.51:8081",
+          ]
         : []),
     ],
     emailAndPassword: {
