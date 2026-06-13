@@ -6,10 +6,6 @@
     "web": {
       "bundler": "metro"
     },
-        "android": {
-      "usesCleartextTraffic": true
-    },
-
     "name": "my-better-t-app",
     "slug": "my-better-t-app",
     "plugins": [
@@ -22,6 +18,5 @@
       "typedRoutes": true,
       "reactCompiler": true
     }
-
   }
 }
