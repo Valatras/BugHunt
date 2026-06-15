@@ -169,6 +169,16 @@ function SignIn() {
                   <Button.Label>Se connecter</Button.Label>
                 )}
               </Button>
+
+              <text className="text-center text-sm text-muted">
+                Pas de compte ?{" "}
+                <Text
+                  className="text-primary"
+                  onPress={() => router.push("/sign-up")}
+                >
+                  Inscrivez-vous
+                </Text>
+              </text>
             </View>
           </>
         );
