@@ -34,6 +34,9 @@ const insects: Insect[] = [
     sciName: "Coccinella septempunctata",
     featured: true,
     rarity: Rarity.Commun,
+    imageKey: "coccinelle",
+    description:
+      "Petit coléoptère rouge à points noirs très apprécié des jardiniers. Elle se nourrit principalement de pucerons et contribue naturellement à protéger les plantes.",
   },
   {
     id: 2,
@@ -41,6 +44,9 @@ const insects: Insect[] = [
     sciName: "Lasius niger",
     featured: false,
     rarity: Rarity.Commun,
+    imageKey: "fourmi-noire",
+    description:
+      "Espèce très commune vivant en colonies organisées. Les ouvrières construisent des galeries complexes et coopèrent pour récolter nourriture et matériaux.",
   },
   {
     id: 3,
@@ -48,6 +54,9 @@ const insects: Insect[] = [
     sciName: "Apis mellifera",
     featured: true,
     rarity: Rarity.Commun,
+    imageKey: "abeille-domestique",
+    description:
+      "Pollinisateur essentiel à de nombreuses cultures. Elle vit dans des ruches et produit du miel grâce au nectar récolté sur les fleurs.",
   },
   {
     id: 4,
@@ -55,6 +64,9 @@ const insects: Insect[] = [
     sciName: "Locusta migratoria",
     featured: false,
     rarity: Rarity.Commun,
+    imageKey: "criquet-migrateur",
+    description:
+      "Insecte sauteur capable de parcourir de grandes distances. Lors de certaines migrations, il peut former d'immenses essaims.",
   },
   {
     id: 5,
@@ -62,6 +74,9 @@ const insects: Insect[] = [
     sciName: "Pyrrhocoris apterus",
     featured: false,
     rarity: Rarity.Commun,
+    imageKey: "gendarme",
+    description:
+      "Insecte rouge et noir souvent observé en groupe au pied des arbres. Il est totalement inoffensif pour l'être humain.",
   },
   {
     id: 6,
@@ -69,6 +84,9 @@ const insects: Insect[] = [
     sciName: "Musca domestica",
     featured: false,
     rarity: Rarity.Commun,
+    imageKey: "mouche-domestique",
+    description:
+      "L'un des insectes les plus répandus au monde. Elle possède une grande capacité d'adaptation aux environnements humains.",
   },
 
   // RARES
@@ -79,6 +97,9 @@ const insects: Insect[] = [
     sciName: "Danaus plexippus",
     featured: true,
     rarity: Rarity.Rare,
+    imageKey: "papillon-monarque",
+    description:
+      "Papillon célèbre pour ses migrations spectaculaires à travers l'Amérique du Nord. Ses ailes orange et noires sont facilement reconnaissables.",
   },
   {
     id: 8,
@@ -86,6 +107,9 @@ const insects: Insect[] = [
     sciName: "Calopteryx virgo",
     featured: true,
     rarity: Rarity.Rare,
+    imageKey: "libellule-bleue",
+    description:
+      "Prédateur aérien très agile vivant près des zones humides. Ses ailes transparentes lui permettent un vol extrêmement précis.",
   },
   {
     id: 9,
@@ -93,6 +117,9 @@ const insects: Insect[] = [
     sciName: "Bombus terrestris",
     featured: false,
     rarity: Rarity.Rare,
+    imageKey: "bourdon-terrestre",
+    description:
+      "Grand pollinisateur au corps trapu et velu. Il peut voler même lorsque les températures sont relativement basses.",
   },
   {
     id: 10,
@@ -100,6 +127,9 @@ const insects: Insect[] = [
     sciName: "Clonopsis gallica",
     featured: false,
     rarity: Rarity.Rare,
+    imageKey: "phasme-gaulois",
+    description:
+      "Maître du camouflage, son corps imite parfaitement une brindille afin d'échapper aux prédateurs.",
   },
   {
     id: 11,
@@ -107,6 +137,9 @@ const insects: Insect[] = [
     sciName: "Cetonia aurata",
     featured: false,
     rarity: Rarity.Rare,
+    imageKey: "cetoine-doree",
+    description:
+      "Coléoptère aux reflets métalliques verts et dorés. On le rencontre souvent dans les jardins durant les journées ensoleillées.",
   },
 
   // ÉPIQUES
@@ -117,6 +150,9 @@ const insects: Insect[] = [
     sciName: "Oryctes nasicornis",
     featured: true,
     rarity: Rarity.Epique,
+    imageKey: "scarabee-rhinoceros",
+    description:
+      "Impressionnant coléoptère doté d'une corne caractéristique. Malgré son apparence intimidante, il est totalement inoffensif.",
   },
   {
     id: 13,
@@ -124,6 +160,9 @@ const insects: Insect[] = [
     sciName: "Lucanus cervus",
     featured: true,
     rarity: Rarity.Epique,
+    imageKey: "lucane-cerf-volant",
+    description:
+      "L'un des plus grands coléoptères d'Europe. Les mâles possèdent de puissantes mandibules rappelant les bois d'un cerf.",
   },
   {
     id: 14,
@@ -131,6 +170,9 @@ const insects: Insect[] = [
     sciName: "Saturnia pyri",
     featured: false,
     rarity: Rarity.Epique,
+    imageKey: "grand-paon-de-nuit",
+    description:
+      "Le plus grand papillon d'Europe. Ses ailes présentent de grands ocelles qui imitent les yeux d'un prédateur.",
   },
   {
     id: 15,
@@ -138,6 +180,9 @@ const insects: Insect[] = [
     sciName: "Rosalia alpina",
     featured: false,
     rarity: Rarity.Epique,
+    imageKey: "rosalie-des-alpes",
+    description:
+      "Coléoptère rare à la coloration bleu-gris et aux longues antennes noires. Espèce protégée dans plusieurs pays européens.",
   },
 
   // LÉGENDAIRES
@@ -148,6 +193,9 @@ const insects: Insect[] = [
     sciName: "Mantis religiosa",
     featured: true,
     rarity: Rarity.Legendaire,
+    imageKey: "mante-religieuse",
+    description:
+      "Prédateur redoutable capable de capturer des proies presque aussi grandes qu'elle. Son attitude évoque une posture de prière.",
   },
   {
     id: 17,
@@ -155,6 +203,9 @@ const insects: Insect[] = [
     sciName: "Attacus atlas",
     featured: true,
     rarity: Rarity.Legendaire,
+    imageKey: "atlas-geant",
+    description:
+      "L'un des plus grands papillons du monde. Son envergure peut dépasser 25 centimètres.",
   },
   {
     id: 18,
@@ -162,6 +213,9 @@ const insects: Insect[] = [
     sciName: "Goliathus goliatus",
     featured: false,
     rarity: Rarity.Legendaire,
+    imageKey: "goliath-geant",
+    description:
+      "Parmi les plus lourds insectes connus. Les adultes impressionnent par leur taille et leur puissance.",
   },
   {
     id: 19,
@@ -169,9 +223,11 @@ const insects: Insect[] = [
     sciName: "Ornithoptera alexandrae",
     featured: false,
     rarity: Rarity.Legendaire,
+    imageKey: "papillon-reine-alexandra",
+    description:
+      "Le plus grand papillon du monde. Cette espèce extrêmement rare est endémique de certaines régions de Papouasie-Nouvelle-Guinée.",
   },
-];
-// ============================================
+];// ============================================
 // DONNÉES D'UTILISATEURS
 // ============================================
 

@@ -16,6 +16,10 @@ model Insect {
     featured   Boolean @default(false)
     rarity     Rarity @default(Commun)
 
+    description String?
+
+    imageKey    String?
+
     userInsects UserInsect[]
 }
 

@@ -44,6 +44,37 @@ export const insectRouter = {
       });
     }),
 
+  // GET DETAILS (authenticated collection modal)
+  getDetails: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .handler(async ({ input, context }) => {
+      const userId = context.session.user.id;
+
+      const insect = await prisma.insect.findUnique({
+        where: { id: input.id },
+        include: {
+          userInsects: {
+            where: {
+              userId,
+            },
+            select: {
+              quantity: true,
+            },
+          },
+        },
+      });
+
+      if (!insect) {
+        throw new Error("Insect not found");
+      }
+
+      return {
+        ...insect,
+        owned: insect.userInsects.length > 0,
+        quantity: insect.userInsects[0]?.quantity ?? 0,
+      };
+    }),
+
   // FILTER BY RARITY
   getByRarity: publicProcedure
     .input(z.object({ rarity: z.nativeEnum(Rarity) }))
@@ -74,4 +105,40 @@ export const insectRouter = {
         },
       });
     }),
+
+  
+  // GET USER COLLECTION (for each insect, check if user has it in collection)
+  getCollection: protectedProcedure.handler(async ({ context }) => {
+  const userId = context.session.user.id;
+
+  const insects = await prisma.insect.findMany({
+    orderBy: { id: "asc" },
+    include: {
+      userInsects: {
+        where: { userId },
+        select: {
+          quantity: true,
+        },
+      },
+    },
+  });
+
+  return insects.map((insect) => {
+    const owned = insect.userInsects.length > 0;
+    const quantity = insect.userInsects[0]?.quantity ?? 0;
+
+    return {
+        id: insect.id,
+        name: insect.name,
+        sciName: insect.sciName,
+        rarity: insect.rarity,
+        featured: insect.featured,
+        description: insect.description,
+        imageKey: insect.imageKey,
+
+        owned,
+        quantity,
+    };
+  });
+}),
 };
