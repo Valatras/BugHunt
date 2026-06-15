@@ -97,7 +97,7 @@ export function SignUp() {
               variant: "success",
               label: "Compte créé avec succès",
             });
-            router.replace("/(tabs)");
+            router.replace("/Bughunt");
           },
         },
       );

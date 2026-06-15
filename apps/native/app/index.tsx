@@ -33,7 +33,7 @@ export default function Index() {
   }
 
   if (session?.user) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/Bughunt" />;
   }
 
   return <Redirect href="/sign-up" />;

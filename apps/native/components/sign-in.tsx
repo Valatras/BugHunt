@@ -89,7 +89,7 @@ function SignIn() {
               variant: "success",
               label: "Bienvenue ! Vous êtes connecté.",
             });
-            router.replace("/(tabs)");
+            router.replace("/Bughunt");
           },
         },
       );
