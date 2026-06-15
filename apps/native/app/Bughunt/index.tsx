@@ -31,17 +31,21 @@ export default function Home() {
   // =========================
   // HANDLERS
   // =========================
-  const goToCollection = () => router.push("/(tabs)/insects");
+  const goToCollection = () => router.push("/Bughunt/insects");
   const goToLeaderboard = () => router.push("/");
   const goToRewards = () => router.push("/");
-  const goToInsect = (id: number) => router.push("/" /*`/insect/${id}`*/);
+  const goToInsect = (id: number) =>
+    router.push({
+      pathname: "/insect/[id]" as never,
+      params: { id: String(id) },
+    });
 
   // =========================
   // GUEST VIEW
   // =========================
   if (!session?.user) {
     return (
-      <ScrollView className="flex-1 bg-background">
+      <ScrollView className="flex-1 bg-green-900">
         <HeroSection
           session={null}
           isConnected={true}
@@ -80,7 +84,7 @@ export default function Home() {
   const recent = recentInsects.data ?? [];
 
   return (
-    <ScrollView className="flex-1 bg-background">
+    <ScrollView className="flex-1 bg-green-900">
       {/* HEADER DASHBOARD */}
       <HeroSection
         session={session}
@@ -110,7 +114,7 @@ export default function Home() {
             <View>
               <Text className="text-muted text-sm">Insectes</Text>
               <Text className="text-2xl font-bold text-foreground">
-                {stats?.collected ?? 0}
+                {stats?.discoveredSpecies ?? 0}
               </Text>
             </View>
 

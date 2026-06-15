@@ -9,13 +9,20 @@ import { AppThemeProvider } from "@/contexts/app-theme-context";
 import { queryClient } from "@/utils/orpc";
 
 export const unstable_settings = {
-  initialRouteName: "index",
+  initialRouteName: "Bughunt",
 };
 
 function StackLayout() {
   return (
     <Stack screenOptions={{}}>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="Bughunt" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="insect/[id]"
+        options={{
+          headerShown: false,
+          presentation: "modal",
+        }}
+      />
       <Stack.Screen
         name="modal"
         options={{ title: "Modal", presentation: "modal" }}
