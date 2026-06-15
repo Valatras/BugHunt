@@ -145,6 +145,9 @@ importers:
       expo-haptics:
         specifier: ~55.0.14
         version: 55.0.14(expo@55.0.26)
+      expo-image:
+        specifier: ~55.0.11
+        version: 55.0.11(expo@55.0.26)(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.0))(react@19.2.0)
       expo-linear-gradient:
         specifier: ^55.0.14
         version: 55.0.14(expo@55.0.26)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.0))(react@19.2.0)

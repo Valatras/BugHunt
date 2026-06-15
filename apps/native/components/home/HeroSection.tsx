@@ -1,8 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { router } from "expo-router";
 import { useThemeColor } from "heroui-native";
-import { Text, View, Pressable } from "react-native";
-
-import { Container } from "@/components/container";
+import { url } from "inspector";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 interface HeroSectionProps {
   session?: { user?: { name: string } } | null;
@@ -12,58 +13,56 @@ interface HeroSectionProps {
   onMyCollection: () => void;
 }
 
-export function HeroSection({
-  session,
-  isConnected,
-  isLoading,
-  onGetStarted,
-  onMyCollection,
-}: HeroSectionProps) {
+export function HeroSection({}: HeroSectionProps) {
   const foregroundColor = useThemeColor("foreground");
-  const backgroundColor = useThemeColor("background");
+  const primaryActionLabel = "Commencer";
+  const secondaryActionLabel = "Ma collection";
 
   return (
-    <View className="relative h-80 md:h-96 bg-linear-to-br from-primary/5 to-primary/10">
-      {/* Subtle gradient overlay */}
-      <View className="absolute inset-0 bg-linear-to-b from-primary/10 to-transparent" />
+    <View className="relative h-105 md:h-120 overflow-hidden">
+      {/* Background image */}
+      <Image
+        source={require("../../assets/images/hero.png")}
+        contentFit="cover"
+        style={StyleSheet.absoluteFill}
+      />
 
-      <Container
-        isScrollable={false}
-        className="h-full justify-center items-center px-6 relative z-10"
-      >
-        {/* Title */}
-        <Text className="text-4xl md:text-5xl font-bold text-foreground text-center mb-3">
-          {/* Logo/Icon */}
-          <View className="mb-6 bg-primary/20 p-6 rounded-full">
+      <View className="absolute inset-0 bg-black/35" />
+      <View className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60" />
+
+      <View className="absolute inset-0 items-center justify-center px-6">
+        <View className="w-full max-w-md items-center rounded-4xl border border-white/15 bg-black/25 px-6 py-8">
+          <View className="mb-5 rounded-full border border-white/20 bg-white/15 p-5">
             <Ionicons name="bug" size={56} color={foregroundColor} />
-            Bughunt
           </View>
-        </Text>
 
-        {/* Subtitle */}
-        <Text className="text-base md:text-lg text-muted text-center mb-8 px-4 max-w-sm">
-          Découvrez, collectionnez et apprenez tout sur le fascinant monde des
-          insectes
-        </Text>
+          <Text className="text-5xl font-bold text-white text-center mb-3">
+            Bughunt
+          </Text>
 
-        {/* CTA Button
-        {!isLoading && (
-          <Pressable
-            className="bg-primary py-3 md:py-4 px-8 rounded-full active:opacity-80 flex-row items-center"
-            onPress={session?.user ? onMyCollection : onGetStarted}
-          >
-            <Ionicons
-              name={session?.user ? "grid" : "arrow-forward"}
-              size={20}
-              color={foregroundColor}
-              style={{ marginRight: 8 }}
-            />
-            <Text className="text-foreground font-semibold text-base md:text-lg">
-              {session?.user ? "Ma Collection" : "Commencer l'"}
-            </Text>
-          </Pressable>
-        )} */}
-      </Container>
+          <Text className="text-base leading-6 text-white/85 text-center mb-8 max-w-sm">
+            Découvrez, collectionnez et apprenez tout sur le fascinant monde des
+            insectes
+          </Text>
+
+          <View className="w-full flex-row gap-3">
+            <Pressable className="flex-1 rounded-2xl bg-primary px-4 py-4 active:opacity-80">
+              <Text className="text-center text-white font-semibold">
+                {primaryActionLabel}
+              </Text>
+            </Pressable>
+
+            <Pressable className="flex-1 rounded-2xl border border-white/20 bg-white/10 px-4 py-4 active:opacity-80">
+              <Text
+                className="text-center text-white font-semibold"
+                onPress={() => router.push("/Bughunt/insects")}
+              >
+                {secondaryActionLabel}
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
