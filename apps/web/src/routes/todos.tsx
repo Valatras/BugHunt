@@ -10,7 +10,7 @@ import { Checkbox } from "@my-better-t-app/ui/components/checkbox";
 import { Input } from "@my-better-t-app/ui/components/input";
 import { createFileRoute } from "@tanstack/react-router";
 import { Loader2, Trash2 } from "lucide-react";
-import { type FormEvent } from "react";
+import { type SubmitEvent } from "react";
 
 import { orpc } from "@/utils/orpc";
 import { useTask } from "hooks";
@@ -31,7 +31,7 @@ function TodosRoute() {
     isLoading,
   } = useTask(orpc);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     handleAddTodo();
   };

@@ -18,27 +18,43 @@ export default function UserMenu() {
   const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
-    return <Skeleton className="h-9 w-24" />;
+    return <Skeleton className="h-9 w-24 rounded-full bg-white/10" />;
   }
 
   if (!session) {
     return (
       <Link to="/login">
-        <Button variant="outline">Sign In</Button>
+        <Button
+          variant="outline"
+          className="rounded-full border-white/10 bg-white/5 text-white hover:bg-white/10"
+        >
+          Se connecter
+        </Button>
       </Link>
     );
   }
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="outline"
+            className="rounded-full border-white/10 bg-white/5 text-white hover:bg-white/10"
+          />
+        }
+      >
         {session.user.name}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-card">
+      <DropdownMenuContent className="border border-white/10 bg-[#08110d] text-white shadow-2xl shadow-black/40">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className="text-white/60">
+            Mon compte
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
+          <DropdownMenuItem className="text-white/80">
+            {session.user.email}
+          </DropdownMenuItem>
           <DropdownMenuItem
             variant="destructive"
             onClick={() => {
@@ -53,7 +69,7 @@ export default function UserMenu() {
               });
             }}
           >
-            Sign Out
+            Se déconnecter
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

@@ -25,7 +25,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "My App",
+        title: "Bughunt",
       },
     ],
     links: [
@@ -41,12 +41,12 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 
 function RootDocument() {
   return (
-    <html lang="en" className="dark">
+    <html lang="fr" className="dark">
       <head>
         <HeadContent />
       </head>
-      <body>
-        <div className="grid h-svh grid-rows-[auto_1fr]">
+      <body className="bg-background text-foreground">
+        <div className="grid min-h-screen grid-rows-[auto_1fr]">
           <Header />
           <Outlet />
         </div>

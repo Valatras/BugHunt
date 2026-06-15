@@ -1,1 +1,20 @@
 @import "@my-better-t-app/ui/globals.css";
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(132, 204, 22, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 22%),
+    linear-gradient(180deg, #07110d 0%, #040706 55%, #020302 100%);
+  color: white;
+}
+
+::selection {
+  background: rgba(163, 230, 53, 0.28);
+  color: white;
+}
