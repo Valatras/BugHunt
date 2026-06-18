@@ -1,5 +1,7 @@
 import { UserRound } from "lucide-react";
 
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
+
 type Props = {
   name: string;
   image?: string | null;
@@ -21,10 +23,8 @@ export function ProfileHeader({ name, image }: Props) {
       )}
 
       <div>
-        <p className="text-sm uppercase tracking-[0.25em] text-white/45">
-          Chasseur
-        </p>
-        <h1 className="mt-2 text-3xl font-black text-white">{name}</h1>
+        <p className={frontendLayout.sectionEyebrow}>Chasseur</p>
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-white">{name}</h1>
       </div>
     </div>
   );

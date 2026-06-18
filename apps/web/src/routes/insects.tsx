@@ -6,6 +6,8 @@ import { getUser } from "@/functions/get-user";
 import { orpc } from "@/utils/orpc";
 import { CollectionHeader } from "@/components/collection/CollectionHeader";
 import { InsectGrid } from "@/components/collection/InsectGrid";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
+import { useCollectionSummary } from "hooks";
 
 export const Route = createFileRoute("/insects")({
   component: InsectsRoute,
@@ -25,13 +27,11 @@ function InsectsRoute() {
   const collection = useQuery(orpc.insect.getCollection.queryOptions());
 
   const data = collection.data ?? [];
-  const discovered = data.filter((item) => item.owned).length;
-  const total = data.length;
-  const completion = total > 0 ? Math.round((discovered / total) * 100) : 0;
+  const { discovered, total, completion } = useCollectionSummary(data);
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="space-y-6">
+    <main className={frontendLayout.pageContainer}>
+      <div className={frontendLayout.pageStack}>
         <button
           type="button"
           onClick={() => navigate({ to: "/dashboard" })}
