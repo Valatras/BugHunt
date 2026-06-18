@@ -27,16 +27,16 @@ export default function WishLayout() {
       <Tabs.Screen
         name="standard"
         options={{
-          title: "standard banner",
+          title: "Standard",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="map" size={size} color={color} />
+            <Ionicons name="bug" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="limited"
         options={{
-          title: "limited banner",
+          title: "Limitée",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
             <Ionicons name="star" size={size} color={color} />
           ),

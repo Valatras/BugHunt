@@ -1,10 +1,5 @@
-// faire une page de gacha simple
-import { Text, View } from "react-native";
+import { WishScreen } from "./WishScreen";
 
 export default function StandardScreen() {
-  return (
-    <View>
-      <Text>Hello World - Standard</Text>
-    </View>
-  );
+  return <WishScreen banner="standard" />;
 }

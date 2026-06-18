@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { WishScreen } from "./WishScreen";
 
 export default function LimitedScreen() {
-  return (
-    <View>
-      <Text>Hello World - Limited</Text>
-    </View>
-  );
+  return <WishScreen banner="limited" />;
 }

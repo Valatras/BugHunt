@@ -475,8 +475,22 @@ async function main() {
   await prisma.pointTransaction.createMany({ data: pointTransactions });
   await prisma.userInsect.createMany({ data: userInsects });
   console.log("Database seeded successfully!");
-}
 
+
+  // ============================================
+  // RESYNCHRONISATION DES SÉQUENCES POSTGRESQL
+  // Nécessaire après un createMany avec des ids
+  // explicites : Prisma n'incrémente pas les
+  // séquences auto-increment automatiquement.
+  // ============================================
+  await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"Insect"', 'id'), (SELECT MAX(id) FROM "Insect"))`;
+  await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"DailySteps"', 'id'), (SELECT MAX(id) FROM "DailySteps"))`;
+  await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"PointTransaction"', 'id'), (SELECT MAX(id) FROM "PointTransaction"))`;
+  await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"UserInsect"', 'id'), (SELECT MAX(id) FROM "UserInsect"))`;
+ 
+  console.log("Database seeded successfully!");
+}
+ 
 main()
   .catch((e) => {
     console.error(e);
@@ -485,3 +499,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+ 
