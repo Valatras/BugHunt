@@ -1,5 +1,7 @@
 import { View, Text } from "react-native";
 
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
+
 export function CollectionHeader({
   discovered,
   total,
@@ -10,21 +12,25 @@ export function CollectionHeader({
   completion: number;
 }) {
   return (
-    <View className="rounded-2xl bg-zinc-900 p-4">
-      <Text className="text-xl font-bold text-white">Bestiaire</Text>
+    <View className={[frontendLayout.cardSurface, "p-4"].join(" ")}>
+      <Text className={frontendLayout.sectionEyebrow}>Bestiaire</Text>
 
-      <Text className="text-muted mt-1">
+      <Text className="mt-2 text-2xl font-black tracking-tight text-white">
+        Collection d’insectes
+      </Text>
+
+      <Text className="mt-1 text-white/60">
         {discovered} / {total} espèces découvertes
       </Text>
 
-      <View className="mt-3 h-3 rounded-full bg-zinc-800 overflow-hidden">
+      <View className={frontendLayout.progressTrack + " mt-3"}>
         <View
-          className="h-full bg-green-500"
+          className={frontendLayout.progressFill}
           style={{ width: `${completion}%` }}
         />
       </View>
 
-      <Text className="text-muted mt-2 text-sm">{completion}% complété</Text>
+      <Text className="mt-2 text-sm text-white/55">{completion}% complété</Text>
     </View>
   );
 }

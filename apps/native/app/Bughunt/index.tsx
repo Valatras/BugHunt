@@ -54,7 +54,7 @@ export default function Home() {
           onMyCollection={() => router.push("/sign-in")}
         />
 
-        <Container className="px-6 py-8">
+        <Container className="px-6 py-8 bg-green-900">
           <Text className="text-xl font-bold text-foreground mb-3">
             Découvre Bughunt
           </Text>
@@ -94,60 +94,37 @@ export default function Home() {
         onMyCollection={goToCollection}
       />
 
-      <Container className="px-6 py-6">
+      <Container className="px-6 py-6 bg-green-700">
         {/* =========================
             STATS USER
         ========================= */}
-        <View className="bg-muted/10 p-4 rounded-2xl mb-6">
+        <View className="bg-green-600 p-4 rounded-2xl mb-6">
           <Text className="text-lg font-bold text-foreground mb-2">
             Bonjour {session.user.name}
           </Text>
 
           <View className="flex-row justify-between">
             <View>
-              <Text className="text-muted text-sm">Points</Text>
+              <Text className=" text-sm">Points</Text>
               <Text className="text-2xl font-bold text-primary">
                 {stats?.points ?? 0}
               </Text>
             </View>
 
             <View>
-              <Text className="text-muted text-sm">Insectes</Text>
+              <Text className=" text-sm">Insectes</Text>
               <Text className="text-2xl font-bold text-foreground">
                 {stats?.discoveredSpecies ?? 0}
               </Text>
             </View>
 
             <View>
-              <Text className="text-muted text-sm">Complétion</Text>
+              <Text className=" text-sm">Complétion</Text>
               <Text className="text-2xl font-bold text-foreground">
                 {stats?.completion ?? 0}%
               </Text>
             </View>
           </View>
-        </View>
-
-        {/* =========================
-            ACTIONS RAPIDES
-        ========================= */}
-        <View className="flex-row gap-3 mb-6">
-          <Pressable
-            onPress={goToCollection}
-            className="flex-1 bg-primary p-4 rounded-xl"
-          >
-            <Text className="text-white text-center font-semibold">
-              Ma collection
-            </Text>
-          </Pressable>
-
-          <Pressable
-            onPress={goToRewards}
-            className="flex-1 bg-muted/20 p-4 rounded-xl"
-          >
-            <Text className="text-foreground text-center font-semibold">
-              Récompenses
-            </Text>
-          </Pressable>
         </View>
 
         {/* =========================
@@ -162,26 +139,24 @@ export default function Home() {
         {/* =========================
             RECENT ACTIVITY
         ========================= */}
-        <View className="mt-8">
+        <View className="bg-green-600 p-4 rounded-2xl mb-6">
           <Text className="text-xl font-bold text-foreground mb-4">
             Activité récente
           </Text>
 
           {recent.length === 0 ? (
-            <Text className="text-muted">
-              Tu n’as pas encore capturé d’insectes.
-            </Text>
+            <Text className="">Tu n’as pas encore capturé d’insectes.</Text>
           ) : (
             recent.map((item) => (
               <Pressable
                 key={item.id}
                 onPress={() => goToInsect(item.insectId)}
-                className="p-3 mb-2 bg-muted/10 rounded-xl"
+                className="p-3 mb-2 bg-muted/25 rounded-xl"
               >
                 <Text className="text-foreground font-medium">
-                  Insecte #{item.insectId}
+                  {item.insect.name}
                 </Text>
-                <Text className="text-muted text-sm">
+                <Text className="text-shadow-accent text-sm">
                   x{item.quantity} capturé(s)
                 </Text>
               </Pressable>

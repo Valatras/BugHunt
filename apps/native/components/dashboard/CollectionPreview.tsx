@@ -1,5 +1,8 @@
 import { Text, View } from "react-native";
 
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
+
 type Props = {
   completion: number;
   totalSpecies: number;
@@ -20,20 +23,31 @@ export function CollectionPreview({
   collection,
 }: Props) {
   return (
-    <View className="rounded-2xl bg-zinc-900 p-5">
-      <Text className="text-lg font-semibold text-white">Collection</Text>
+    <View className={[frontendLayout.cardSurface, "p-5"].join(" ")}>
+      <SectionHeader
+        eyebrow="Collection"
+        title="Aperçu du bestiaire"
+        description={`${collection.length} / ${totalSpecies} espèces`}
+      />
 
-      <Text className="mt-1 text-zinc-400">
-        {collection.length} / {totalSpecies} espèces
-      </Text>
+      <View className="mt-4 h-3 overflow-hidden rounded-full bg-black/30">
+        <View
+          className={frontendLayout.progressFill}
+          style={{ width: `${completion}%` }}
+        />
+      </View>
 
-      {collection.slice(0, 8).map((entry) => (
-        <View key={entry.id} className="rounded-xl bg-zinc-800 px-3 py-2">
-          <Text className="text-white">{entry.insect.name}</Text>
+      <Text className="mt-3 text-sm text-white/55">{completion}% complété</Text>
 
-          <Text className="text-zinc-400">x{entry.quantity}</Text>
-        </View>
-      ))}
+      <View className="mt-4 gap-3">
+        {collection.slice(0, 8).map((entry) => (
+          <View key={entry.id} className={frontendLayout.cardSurfaceMuted + " px-3 py-2"}>
+            <Text className="text-white">{entry.insect.name}</Text>
+
+            <Text className="text-white/55">x{entry.quantity}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }

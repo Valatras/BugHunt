@@ -92,12 +92,9 @@ export function FeaturedInsectsSection({
         <Text className="text-2xl md:text-3xl font-bold text-foreground">
           Insectes en vedette
         </Text>
-        <Chip variant="secondary" color="accent" size="sm">
-          <Chip.Label>Nouveautés</Chip.Label>
-        </Chip>
       </View>
 
-      <Text className="text-muted mb-6 px-6">
+      <Text className="mb-6 px-6">
         Découvrez les derniers ajouts à notre collection
       </Text>
 

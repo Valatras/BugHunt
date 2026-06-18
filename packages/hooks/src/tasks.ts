@@ -1,47 +1,70 @@
-import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type { orpc as ORPC } from "../../../apps/native/utils/orpc";
+import { useState } from "react";
 
+type TodoItem = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
 
-export function useTask(orpc: typeof ORPC) {
+// Shared todo workflow used by both the web and native demos.
+export function useTask(orpc: any) {
   const [newTodoText, setNewTodoText] = useState("");
-    const todos = useQuery(orpc.todo.getAll.queryOptions());
-    const createMutation = useMutation(
-      orpc.todo.create.mutationOptions({
-        onSettled: () => {
-          todos.refetch();
-          setNewTodoText("");
-        },
-      }),
-    );
-    const toggleMutation = useMutation(
-      orpc.todo.toggle.mutationOptions({
-        onSettled: () => {
-          todos.refetch();
-        },
-      }),
-    );
-    const deleteMutation = useMutation(
-      orpc.todo.delete.mutationOptions({
-        onSettled: () => {
-          todos.refetch();
-        },
-      }),
-    );
+  const todos = useQuery<TodoItem[]>(orpc.todo.getAll.queryOptions());
+
+  const createMutation = useMutation<unknown, Error, { text: string }, unknown>(
+    orpc.todo.create.mutationOptions({
+      onSettled: () => {
+        todos.refetch();
+        setNewTodoText("");
+      },
+    }),
+  );
+
+  const toggleMutation = useMutation<
+    unknown,
+    Error,
+    { id: number; completed: boolean },
+    unknown
+  >(
+    orpc.todo.toggle.mutationOptions({
+      onSettled: () => {
+        todos.refetch();
+      },
+    }),
+  );
+
+  const deleteMutation = useMutation<unknown, Error, { id: number }, unknown>(
+    orpc.todo.delete.mutationOptions({
+      onSettled: () => {
+        todos.refetch();
+      },
+    }),
+  );
 
   const handleAddTodo = () => {
     if (newTodoText.trim()) {
       createMutation.mutate({ text: newTodoText });
     }
+
     setNewTodoText("");
   };
 
-  const isLoading = todos?.isLoading;
-  const completedCount = todos?.data?.filter((t: { completed: boolean }) => t.completed).length || 0;
-  const totalCount = todos?.data?.length || 0;
+  const completedCount =
+    todos.data?.filter((todo) => todo.completed).length ?? 0;
+
+  const totalCount = todos.data?.length ?? 0;
 
   return {
-    newTodoText, setNewTodoText, todos, createMutation, toggleMutation, deleteMutation, isLoading, completedCount, totalCount, handleAddTodo
-  }
-
+    newTodoText,
+    setNewTodoText,
+    todos,
+    createMutation,
+    toggleMutation,
+    deleteMutation,
+    isLoading: todos.isLoading,
+    completedCount,
+    totalCount,
+    handleAddTodo,
+  };
 }

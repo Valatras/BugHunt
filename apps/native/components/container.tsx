@@ -9,6 +9,7 @@ const AnimatedView = Animated.createAnimatedComponent(View);
 type Props = AnimatedProps<ViewProps> & {
   className?: string;
   isScrollable?: boolean;
+  contentContainerClassName?: string;
   scrollViewProps?: Omit<ScrollViewProps, "contentContainerStyle">;
 };
 
@@ -16,6 +17,7 @@ export function Container({
   children,
   className,
   isScrollable = true,
+  contentContainerClassName,
   scrollViewProps,
   ...props
 }: PropsWithChildren<Props>) {
@@ -31,7 +33,10 @@ export function Container({
     >
       {isScrollable ? (
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerClassName={cn(
+            "flex-grow",
+            contentContainerClassName,
+          )}
           keyboardShouldPersistTaps="handled"
           contentInsetAdjustmentBehavior="automatic"
           {...scrollViewProps}
