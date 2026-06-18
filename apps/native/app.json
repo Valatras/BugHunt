@@ -12,11 +12,35 @@
       "expo-font",
       "expo-router",
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Bughunt utilise votre position pour centrer la carte.",
+          "locationAlwaysAndWhenInUsePermission": "Bughunt utilise votre position en arrière-plan."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACTIVITY_RECOGNITION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.valatras.mybettertapp"
+    },
+    "ios": {
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Bughunt utilise votre position pour centrer la carte.",
+        "NSMotionUsageDescription": "Bughunt compte vos pas pour vous récompenser en points."
+      },
+      "bundleIdentifier": "com.valatras.mybettertapp"
     }
   }
 }

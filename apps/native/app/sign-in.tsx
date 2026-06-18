@@ -18,7 +18,7 @@ export default function SignInModal() {
             Se connecter
           </Text>
           <Pressable
-            onPress={() => router.back()}
+            onPress={() => router.push("/Bughunt")}
             className="rounded-full border border-white/10 bg-white/5 p-2.5 active:opacity-70"
           >
             <Ionicons name="close" size={24} color={foregroundColor} />
