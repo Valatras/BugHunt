@@ -47,6 +47,9 @@ export function WishScreen({ banner }: WishScreenProps) {
         queryClient.invalidateQueries({
           queryKey: orpc.userInsect.getRecent.queryKey(),
         });
+        queryClient.invalidateQueries({
+          queryKey: orpc.insect.getCollection.queryKey(),
+        });
       },
     }),
   );
