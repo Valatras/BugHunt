@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import { useThemeColor } from "heroui-native";
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
@@ -22,6 +23,8 @@ export function CollectionPreview({
   totalSpecies,
   collection,
 }: Props) {
+  const progressColor = useThemeColor("success");
+
   return (
     <View className={[frontendLayout.cardSurface, "p-5"].join(" ")}>
       <SectionHeader
@@ -32,8 +35,11 @@ export function CollectionPreview({
 
       <View className="mt-4 h-3 overflow-hidden rounded-full bg-black/30">
         <View
-          className={frontendLayout.progressFill}
-          style={{ width: `${completion}%` }}
+          className="h-full rounded-full"
+          style={{
+            width: `${completion}%`,
+            backgroundColor: progressColor,
+          }}
         />
       </View>
 

@@ -13,20 +13,18 @@ export default function SignInModal() {
   return (
     <ScrollView className="flex-1 bg-background">
       <Container className="px-6 py-8">
-        {/* Header with close button */}
-        <View className="flex-row items-center justify-between mb-6">
-          <Text className="text-2xl font-bold text-foreground">
+        <View className="mb-6 flex-row items-center justify-between">
+          <Text className="text-3xl font-black tracking-tight text-white">
             Se connecter
           </Text>
           <Pressable
             onPress={() => router.back()}
-            className="bg-muted/20 p-2 rounded-full active:opacity-70"
+            className="rounded-full border border-white/10 bg-white/5 p-2.5 active:opacity-70"
           >
             <Ionicons name="close" size={24} color={foregroundColor} />
           </Pressable>
         </View>
 
-        {/* Sign In Form */}
         <SignIn />
       </Container>
     </ScrollView>

@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeColor } from "heroui-native";
-import { View, Pressable, Text, ScrollView } from "react-native";
+import { View, Pressable, Text } from "react-native";
 
 import { SignUp } from "@/components/sign-up";
 import { Container } from "@/components/container";
@@ -12,19 +12,16 @@ export default function SignUpModal() {
 
   return (
     <Container className="px-6 py-8">
-      {/* Header */}
-      <View className="flex-row items-center justify-between mb-6">
-        <Text className="text-2xl font-bold text-foreground">
+      <View className="mb-6 flex-row items-center justify-between">
+        <Text className="text-3xl font-black tracking-tight text-white">
           Créer un compte
         </Text>
       </View>
 
-      {/* Sign Up Form */}
       <SignUp />
 
-      {/* Footer with Sign In Link */}
-      <View className="flex-row items-center justify-center mt-6">
-        <Text className="text-muted text-sm mr-2">
+      <View className="mt-6 flex-row items-center justify-center">
+        <Text className="mr-2 text-sm text-white/60">
           Vous avez déjà un compte?
         </Text>
         <Pressable
@@ -37,7 +34,7 @@ export default function SignUpModal() {
             color={foregroundColor}
             style={{ marginRight: 4 }}
           />
-          <Text className="text-primary font-medium text-sm">Se connecter</Text>
+          <Text className="text-sm font-medium text-lime-300">Se connecter</Text>
         </Pressable>
       </View>
     </Container>

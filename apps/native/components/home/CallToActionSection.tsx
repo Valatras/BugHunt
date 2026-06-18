@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Card, useThemeColor } from "heroui-native";
 import { Text, View, Pressable } from "react-native";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
 interface CallToActionSectionProps {
   onSignUp: () => void;
@@ -17,40 +18,42 @@ export function CallToActionSection({
   const disabled = !!isLoading;
 
   return (
-    <Card variant="secondary" className="mb-8 p-8 items-center">
-      <Ionicons name="rocket" size={48} color={foregroundColor} />
-      <Text className="text-foreground text-xl md:text-2xl font-bold mt-4 mb-2 text-center">
-        Prêt à commencer?
-      </Text>
-      <Text className="text-muted text-center mb-6 text-sm md:text-base px-4">
-        Créez votre compte gratuitement et commencez votre collection dès
-        aujourd'hui
-      </Text>
-      <Pressable
-        className="bg-primary py-3 px-8 rounded-full active:opacity-80 mb-4"
-        onPress={onSignUp}
-        disabled={disabled}
-      >
-        <Text className="text-foreground font-semibold text-base">
-          Créer un compte
+    <Card className={[frontendLayout.cardSurface, "mb-8 p-0"].join(" ")}>
+      <View className="items-center px-6 py-8">
+        <Ionicons name="rocket" size={48} color={foregroundColor} />
+        <Text className="mt-4 mb-2 text-center text-2xl font-black tracking-tight text-white">
+          Prêt à commencer?
         </Text>
-      </Pressable>
+        <Text className="mb-6 px-4 text-center text-sm leading-6 text-white/65">
+          Créez votre compte gratuitement et commencez votre collection dès
+          aujourd'hui
+        </Text>
+        <Pressable
+          className="mb-3 rounded-2xl bg-lime-300 px-8 py-3 active:opacity-80"
+          onPress={onSignUp}
+          disabled={disabled}
+        >
+          <Text className="text-[#08110e] font-semibold text-base">
+            Créer un compte
+          </Text>
+        </Pressable>
 
-      <Pressable
-        className="bg-primary py-3 md:py-4 px-8 rounded-full active:opacity-80 flex-row items-center justify-center"
-        onPress={onSignIn}
-        disabled={disabled}
-      >
-        <Ionicons
-          name="arrow-forward"
-          size={20}
-          color={foregroundColor}
-          style={{ marginRight: 8 }}
-        />
-        <Text className="text-foreground font-semibold text-base md:text-lg">
-          J'ai déjà un compte
-        </Text>
-      </Pressable>
+        <Pressable
+          className="flex-row items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-8 py-3 active:opacity-80"
+          onPress={onSignIn}
+          disabled={disabled}
+        >
+          <Ionicons
+            name="arrow-forward"
+            size={20}
+            color={foregroundColor}
+            style={{ marginRight: 8 }}
+          />
+          <Text className="text-white font-semibold text-base">
+            J'ai déjà un compte
+          </Text>
+        </Pressable>
+      </View>
     </Card>
   );
 }

@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Button,
   Checkbox,
@@ -10,13 +9,13 @@ import {
   TextField,
   useThemeColor,
 } from "heroui-native";
-import { useState } from "react";
 import { View, Text, ScrollView, Alert } from "react-native";
 
 import { Container } from "@/components/container";
 import { orpc } from "@/utils/orpc";
 
 import { useTask } from "hooks";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
 export default function TodosScreen() {
   const {
@@ -55,9 +54,9 @@ export default function TodosScreen() {
   return (
     <Container>
       <ScrollView className="flex-1" contentContainerClassName="p-4">
-        <View className="py-4 mb-4">
+        <View className="mb-4 py-4">
           <View className="flex-row items-center justify-between">
-            <Text className="text-2xl font-semibold text-foreground tracking-tight">
+            <Text className="text-3xl font-black tracking-tight text-white">
               Tasks
             </Text>
             {totalCount > 0 && (
@@ -70,7 +69,7 @@ export default function TodosScreen() {
           </View>
         </View>
 
-        <Surface variant="secondary" className="mb-4 p-3 rounded-lg">
+        <Surface className={[frontendLayout.cardSurface, "mb-4 p-3"].join(" ")}>
           <View className="flex-row items-center gap-2">
             <View className="flex-1">
               <TextField>
@@ -115,20 +114,17 @@ export default function TodosScreen() {
         {isLoading && (
           <View className="items-center justify-center py-12">
             <Spinner size="lg" />
-            <Text className="text-muted text-sm mt-3">Loading tasks...</Text>
+            <Text className="mt-3 text-sm text-white/60">Loading tasks...</Text>
           </View>
         )}
 
         {todos?.data && todos.data.length === 0 && !isLoading && (
-          <Surface
-            variant="secondary"
-            className="items-center justify-center py-10 rounded-lg"
-          >
+          <Surface className={[frontendLayout.cardSurface, "items-center justify-center py-10"].join(" ")}>
             <Ionicons name="checkbox-outline" size={40} color={mutedColor} />
-            <Text className="text-foreground font-medium mt-3">
+            <Text className="mt-3 font-medium text-white">
               No tasks yet
             </Text>
-            <Text className="text-muted text-xs mt-1">
+            <Text className="mt-1 text-xs text-white/60">
               Add your first task to get started
             </Text>
           </Surface>
@@ -139,8 +135,7 @@ export default function TodosScreen() {
             {todos.data.map((todo) => (
               <Surface
                 key={todo.id}
-                variant="secondary"
-                className="p-3 rounded-lg"
+                className={[frontendLayout.cardSurface, "p-3"].join(" ")}
               >
                 <View className="flex-row items-center gap-3">
                   <Checkbox
@@ -151,7 +146,7 @@ export default function TodosScreen() {
                   />
                   <View className="flex-1">
                     <Text
-                      className={`text-sm ${todo.completed ? "text-muted line-through" : "text-foreground"}`}
+                      className={`text-sm ${todo.completed ? "text-white/55 line-through" : "text-white"}`}
                     >
                       {todo.text}
                     </Text>

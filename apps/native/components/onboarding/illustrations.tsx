@@ -4,7 +4,7 @@ import { ResponsiveIllustration } from "./responsiveUtils";
 export function WalkIllustration() {
   return (
     <View style={styles.container}>
-      <View style={[styles.glow, { backgroundColor: "#a78bfa" }]} />
+      <View style={[styles.glow, { backgroundColor: "#a3e635" }]} />
       <View style={styles.stepRow}>
         <View style={styles.stepDot} />
         <View style={styles.stepDot} />
@@ -22,7 +22,7 @@ export function WalkIllustration() {
 export function SummonIllustration() {
   return (
     <View style={styles.container}>
-      <View style={[styles.glow, { backgroundColor: "#38bdf8" }]} />
+      <View style={[styles.glow, { backgroundColor: "#10b981" }]} />
       <View style={styles.orb}>
         <View style={styles.orbCore} />
         <Text style={styles.orbText}>✨</Text>
@@ -35,7 +35,7 @@ export function SummonIllustration() {
 export function CollectionIllustration() {
   return (
     <View style={styles.container}>
-      <View style={[styles.glow, { backgroundColor: "#22c55e" }]} />
+      <View style={[styles.glow, { backgroundColor: "#f59e0b" }]} />
       <View style={styles.cardStack}>
         <View style={[styles.card, styles.cardBack]} />
         <View style={[styles.card, styles.cardMiddle]} />
@@ -50,7 +50,7 @@ export function CollectionIllustration() {
 export function ProgressIllustration() {
   return (
     <View style={styles.container}>
-      <View style={[styles.glow, { backgroundColor: "#fbbf24" }]} />
+      <View style={[styles.glow, { backgroundColor: "#a3e635" }]} />
       <View style={styles.trophy}>
         <View style={styles.trophyBase} />
         <View style={styles.trophyCup} />
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width: getScaledSize(16),
     height: getScaledSize(16),
     borderRadius: getScaledSize(9),
-    backgroundColor: "#6d28d9",
+    backgroundColor: "#10b981",
     marginHorizontal: getScaledSize(4),
   },
   orb: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     width: getScaledSize(72),
     height: getScaledSize(72),
     borderRadius: getScaledSize(36),
-    backgroundColor: "rgba(56,189,248,0.35)",
+    backgroundColor: "rgba(16,185,129,0.35)",
   },
   orbText: {
     color: "#ffffff",
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     height: getScaledSize(170),
     borderRadius: getScaledSize(85),
     borderWidth: 2,
-    borderColor: "rgba(56,189,248,0.35)",
+    borderColor: "rgba(163,230,53,0.35)",
   },
   cardStack: {
     width: getScaledSize(170),
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     width: getScaledSize(90),
     height: getScaledSize(26),
     borderRadius: getScaledSize(18),
-    backgroundColor: "#f59e0b",
+    backgroundColor: "#a3e635",
     marginTop: -6,
   },
   trophyBadge: {
@@ -210,6 +210,6 @@ const styles = StyleSheet.create({
   trophyText: {
     fontSize: getScaledSize(16),
     fontWeight: "800",
-    color: "#92400e",
+    color: "#365314",
   },
 });

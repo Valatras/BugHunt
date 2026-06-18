@@ -19,8 +19,8 @@ export type Slide = {
 export const SLIDES: Slide[] = [
   {
     key: "walk",
-    accentColor: "#8b5cf6",
-    gradientColors: ["#05050f", "#0d0622", "#05050f"],
+    accentColor: "#a3e635",
+    gradientColors: ["#050a08", "#08110d", "#050a08"],
     tag: "EXPLORE",
     title: "Explore",
     subtitle:
@@ -29,8 +29,8 @@ export const SLIDES: Slide[] = [
   },
   {
     key: "summon",
-    accentColor: "#06b6d4",
-    gradientColors: ["#020f18", "#031c2d", "#020f18"],
+    accentColor: "#10b981",
+    gradientColors: ["#030806", "#08110d", "#030806"],
     tag: "CAPTURE",
     title: "🎲 Capture des insectes",
     subtitle:
@@ -39,8 +39,8 @@ export const SLIDES: Slide[] = [
   },
   {
     key: "collection",
-    accentColor: "#22c55e",
-    gradientColors: ["#05140a", "#0b2515", "#05140a"],
+    accentColor: "#f59e0b",
+    gradientColors: ["#050a08", "#0b110b", "#050a08"],
     tag: "COLLECTIONNE",
     title: "📚 Complète ta collection",
     subtitle:
@@ -49,8 +49,8 @@ export const SLIDES: Slide[] = [
   },
   {
     key: "progress",
-    accentColor: "#f59e0b",
-    gradientColors: ["#1a1200", "#291b04", "#1a1200"],
+    accentColor: "#a3e635",
+    gradientColors: ["#050a08", "#0d1410", "#050a08"],
     tag: "PROGRESSION",
     title: "🏆 Progresse en tant que chasseur",
     subtitle:

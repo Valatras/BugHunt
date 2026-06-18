@@ -1,6 +1,7 @@
 import "@/global.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import { Uniwind } from "uniwind";
 import { HeroUINativeProvider } from "heroui-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -11,6 +12,11 @@ import { queryClient } from "@/utils/orpc";
 export const unstable_settings = {
   initialRouteName: "Bughunt",
 };
+
+// Keep native theme aligned with the dark web reference on first paint.
+if (Uniwind.currentTheme !== "dark") {
+  Uniwind.setTheme("dark");
+}
 
 function StackLayout() {
   return (

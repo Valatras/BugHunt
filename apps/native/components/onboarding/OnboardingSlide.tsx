@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  useWindowDimensions,
 } from "react-native";
 import { Dots } from "./Dots";
 import type { Slide } from "./slides";
@@ -14,7 +13,6 @@ import {
   ResponsiveButton,
   ResponsiveTag,
   getIllustrationAreaMinHeight,
-  BREAKPOINTS,
 } from "./responsiveUtils";
 
 export function OnboardingSlide({
@@ -27,10 +25,9 @@ export function OnboardingSlide({
   onNext: () => void;
   onSkip: () => void;
   isLast: boolean;
-}) {
+  }) {
   const { accentColor, gradientColors, tag, title, subtitle, Illustration } =
     slide;
-  const { height: screenHeight } = useWindowDimensions();
   const illustrationMinHeight = getIllustrationAreaMinHeight();
 
   return (

@@ -7,6 +7,8 @@ import {
   FlatList,
   useWindowDimensions,
 } from "react-native";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
 interface InsectCardItem {
   id: number;
@@ -34,22 +36,27 @@ function InsectCard({
       onPress={() => onPress?.(insect.id)}
       className="active:opacity-80"
     >
-      <Card className="overflow-hidden">
+      <Card className={[frontendLayout.cardSurface, "overflow-hidden p-0"].join(" ")}>
         {/* Image Placeholder */}
-        <View className="bg-linear-to-br from-primary/20 to-success/20 h-40 items-center justify-center">
+        <View
+          className="h-40 items-center justify-center border-b border-white/10"
+          style={{
+            backgroundColor: "rgba(163,230,53,0.08)",
+          }}
+        >
           <Ionicons name="bug-sharp" size={56} color={foregroundColor} />
         </View>
 
         {/* Info */}
-        <View className="p-3">
+        <View className="p-4">
           <Text
-            className="text-foreground font-semibold mb-2 text-sm"
+            className="mb-2 text-sm font-semibold text-white"
             numberOfLines={1}
           >
             {insect.name}
           </Text>
           {insect.rarity && (
-            <Chip>
+            <Chip variant="secondary" color="accent">
               <Chip.Label className="text-xs">{insect.rarity}</Chip.Label>
             </Chip>
           )}
@@ -75,12 +82,14 @@ export function FeaturedInsectsSection({
   if (isLoading) {
     return (
       <View className="mb-8">
-        <Text className="text-3xl font-bold text-foreground mb-6">
-          Insectes en vedette
-        </Text>
-        <View className="w-full items-center py-8">
+        <SectionHeader
+          eyebrow="Vedettes"
+          title="Insectes en vedette"
+          description="Découvrez les derniers ajouts à notre collection"
+        />
+        <View className={frontendLayout.cardSurface + " mt-6 w-full items-center py-8"}>
           <Ionicons name="hourglass-outline" size={32} color={mutedColor} />
-          <Text className="text-muted mt-2">Chargement...</Text>
+          <Text className="mt-2 text-white/60">Chargement...</Text>
         </View>
       </View>
     );
@@ -88,15 +97,13 @@ export function FeaturedInsectsSection({
 
   return (
     <View className="mb-8">
-      <View className="flex-row items-center justify-between mb-4 px-6">
-        <Text className="text-2xl md:text-3xl font-bold text-foreground">
-          Insectes en vedette
-        </Text>
+      <View className="px-6">
+        <SectionHeader
+          eyebrow="Vedettes"
+          title="Insectes en vedette"
+          description="Découvrez les derniers ajouts à notre collection"
+        />
       </View>
-
-      <Text className="mb-6 px-6">
-        Découvrez les derniers ajouts à notre collection
-      </Text>
 
       {/* Mobile: Horizontal Carousel */}
       {isMobile && (
@@ -137,9 +144,9 @@ export function FeaturedInsectsSection({
 
       {/* Empty State */}
       {insects.length === 0 && !isLoading && (
-        <View className="w-full items-center py-8 px-6">
+        <View className={frontendLayout.emptyState + " mx-6 mt-6 items-center py-8"}>
           <Ionicons name="bug" size={32} color={mutedColor} />
-          <Text className="text-muted mt-2">
+          <Text className="mt-2 text-white/60">
             Aucun insecte en vedette pour le moment
           </Text>
         </View>

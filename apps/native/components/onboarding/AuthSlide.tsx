@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  useWindowDimensions,
 } from "react-native";
 import { SignIn } from "@/components/sign-in";
 import { SignUp } from "@/components/sign-up";
@@ -14,17 +13,15 @@ import {
   ResponsiveFontSize,
   ResponsiveSpacing,
   ResponsiveTag,
-  BREAKPOINTS,
   IS_LANDSCAPE,
 } from "./responsiveUtils";
 
 export function AuthSlide({ accentColor }: { accentColor: string }) {
   const [tab, setTab] = useState<"signin" | "signup">("signin");
-  const { height: screenHeight } = useWindowDimensions();
 
   return (
     <LinearGradient
-      colors={["#020405", "#050809", "#020405"]}
+      colors={["#050a08", "#08110d", "#050a08"]}
       style={[
         styles.container,
         {
@@ -149,6 +146,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: ResponsiveSpacing.contentMargin,
     borderBottomWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.08)",
   },
   tabItem: {
     flex: 1,

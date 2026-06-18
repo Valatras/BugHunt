@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Card, useThemeColor } from "heroui-native";
 import { Text, View } from "react-native";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
 interface FeatureCardProps {
   icon: keyof typeof Ionicons.glyphMap;
@@ -16,28 +17,25 @@ export function FeatureCard({
   color,
 }: FeatureCardProps) {
   const foregroundColor = useThemeColor("foreground");
-  const mutedColor = useThemeColor("muted");
   const iconColor = color || foregroundColor;
 
   return (
-    <Card variant="secondary" className="mb-4 p-5">
-      <View className="flex-row items-start">
-        {/* Icon Container */}
+    <Card className={[frontendLayout.cardSurface, "mb-4 p-0"].join(" ")}>
+      <View className="flex-row items-start gap-4 p-5">
         <View
-          className="p-3 rounded-full mr-4"
+          className="h-12 w-12 items-center justify-center rounded-2xl border border-white/10"
           style={{
-            backgroundColor: color ? `${color}20` : "rgb(59, 130, 246)",
+            backgroundColor: color ? `${color}1f` : "rgba(255,255,255,0.08)",
           }}
         >
-          <Ionicons name={icon} size={28} color={iconColor} />
+          <Ionicons name={icon} size={26} color={iconColor} />
         </View>
 
-        {/* Content */}
         <View className="flex-1">
-          <Text className="text-foreground text-lg font-semibold mb-2">
+          <Text className="text-white text-lg font-semibold mb-2">
             {title}
           </Text>
-          <Text className="text-muted text-sm leading-5">{description}</Text>
+          <Text className="text-white/70 text-sm leading-6">{description}</Text>
         </View>
       </View>
     </Card>

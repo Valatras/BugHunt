@@ -55,14 +55,16 @@ export default function InsectModal() {
               {data.owned ? data.sciName : "???"}
             </Text>
 
-            <Text className="mt-4 font-semibold">Rareté</Text>
-            <Text>{data.rarity}</Text>
+            <Text className="text-foreground mt-4 font-semibold">Rareté</Text>
+            <Text className="text-muted">{data.rarity}</Text>
 
-            <Text className="mt-4 font-semibold">Quantité</Text>
-            <Text>{data.quantity}</Text>
+            <Text className="text-foreground mt-4 font-semibold">Quantité</Text>
+            <Text className="text-muted">{data.quantity}</Text>
 
-            <Text className="mt-4 font-semibold">Description</Text>
-            <Text>
+            <Text className="text-foreground mt-4 font-semibold">
+              Description
+            </Text>
+            <Text className="text-muted">
               {data.owned
                 ? data.description
                 : "Capturez cet insecte pour débloquer sa fiche."}

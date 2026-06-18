@@ -123,7 +123,7 @@ export default function Onboarding() {
 const styles = StyleSheet.create({
   flatList: {
     flex: 1,
-    backgroundColor: "#050505",
+    backgroundColor: "#050a08",
   },
   pageWrapper: {
     flex: 1,

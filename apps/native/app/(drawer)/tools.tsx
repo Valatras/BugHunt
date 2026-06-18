@@ -8,6 +8,7 @@ import { SignIn } from "@/components/sign-in";
 import { SignUp } from "@/components/sign-up";
 import { authClient } from "@/lib/auth-client";
 import { queryClient, orpc } from "@/utils/orpc";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
 export default function server_tools() {
   const healthCheck = useQuery(orpc.healthCheck.queryOptions());
@@ -23,32 +24,32 @@ export default function server_tools() {
 
   return (
     <Container className="p-6">
-      <View className="py-4 mb-6">
-        <Text className="text-4xl font-bold text-foreground mb-2">
+      <View className="mb-6 py-4">
+        <Text className="mb-2 text-4xl font-black tracking-tight text-white">
           BETTER T STACK
         </Text>
       </View>
 
       {session?.user ? (
-        <Card variant="secondary" className="mb-6 p-4">
-          <Text className="text-foreground text-base mb-2">
+        <Card className={[frontendLayout.cardSurface, "mb-6 p-4"].join(" ")}>
+          <Text className="mb-2 text-base text-white">
             Welcome, <Text className="font-medium">{session.user.name}</Text>
           </Text>
-          <Text className="text-muted text-sm mb-4">{session.user.email}</Text>
+          <Text className="mb-4 text-sm text-white/60">{session.user.email}</Text>
           <Pressable
-            className="bg-danger py-3 px-4 rounded-lg self-start active:opacity-70"
+            className="self-start rounded-2xl bg-rose-500 px-4 py-3 active:opacity-70"
             onPress={() => {
               authClient.signOut();
               queryClient.invalidateQueries();
             }}
           >
-            <Text className="text-foreground font-medium">Sign Out</Text>
+            <Text className="font-medium text-white">Sign Out</Text>
           </Pressable>
         </Card>
       ) : null}
 
-      <Card variant="secondary" className="p-6">
-        <View className="flex-row items-center justify-between mb-4">
+      <Card className={[frontendLayout.cardSurface, "p-6"].join(" ")}>
+        <View className="mb-4 flex-row items-center justify-between">
           <Card.Title>System Status</Card.Title>
           <Chip
             variant="secondary"
@@ -59,13 +60,13 @@ export default function server_tools() {
           </Chip>
         </View>
 
-        <Card className="p-4">
+        <Card className={[frontendLayout.cardSurfaceMuted, "p-4"].join(" ")}>
           <View className="flex-row items-center">
             <View
-              className={`w-3 h-3 rounded-full mr-3 ${isConnected ? "bg-success" : "bg-muted"}`}
+              className={`mr-3 h-3 w-3 rounded-full ${isConnected ? "bg-lime-300" : "bg-white/30"}`}
             />
             <View className="flex-1">
-              <Text className="text-foreground font-medium mb-1">
+              <Text className="mb-1 font-medium text-white">
                 ORPC Backend
               </Text>
               <Card.Description>
@@ -93,7 +94,7 @@ export default function server_tools() {
         </Card>
       </Card>
 
-      <Card variant="secondary" className="mt-6 p-4">
+      <Card className={[frontendLayout.cardSurface, "mt-6 p-4"].join(" ")}>
         <Card.Title className="mb-3">Private Data</Card.Title>
         {privateData && (
           <Card.Description>{privateData.data?.message}</Card.Description>

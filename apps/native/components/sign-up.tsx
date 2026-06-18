@@ -107,7 +107,7 @@ export function SignUp() {
   return (
     <Surface
       variant="secondary"
-      className="p-6 rounded-3xl border border-white/10 shadow-xl shadow-black/20 bg-surface/95"
+      className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20"
     >
       <form.Subscribe
         selector={(state) => ({
@@ -120,7 +120,7 @@ export function SignUp() {
 
           return (
             <>
-              <FieldError isInvalid={!!formError} className="mb-3">
+              <FieldError isInvalid={!!formError} className="mb-3 text-rose-300">
                 {formError}
               </FieldError>
 
@@ -193,7 +193,7 @@ export function SignUp() {
                 <Button
                   onPress={form.handleSubmit}
                   isDisabled={isSubmitting}
-                  className="mt-1"
+                  className="mt-1 rounded-2xl bg-lime-300"
                 >
                   {isSubmitting ? (
                     <View className="flex-row items-center justify-center gap-2">

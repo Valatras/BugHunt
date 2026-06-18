@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import { useThemeColor } from "heroui-native";
 
 import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
 
@@ -8,6 +9,7 @@ type Props = {
 
 export function LevelProgress({ points }: Props) {
   const currentXp = points % 100;
+  const progressColor = useThemeColor("success");
 
   return (
     <View className={[frontendLayout.cardSurface, "p-5"].join(" ")}>
@@ -19,9 +21,10 @@ export function LevelProgress({ points }: Props) {
 
       <View className={frontendLayout.progressTrack + " mt-4"}>
         <View
-          className={frontendLayout.progressFill}
+          className="h-full rounded-full"
           style={{
             width: `${currentXp}%`,
+            backgroundColor: progressColor,
           }}
         />
       </View>

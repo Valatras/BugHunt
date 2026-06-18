@@ -108,7 +108,7 @@ function SignIn() {
 
         return (
           <>
-            <FieldError isInvalid={!!formError} className="mb-3">
+            <FieldError isInvalid={!!formError} className="mb-3 text-rose-300">
               {formError}
             </FieldError>
 
@@ -158,7 +158,7 @@ function SignIn() {
               <Button
                 onPress={form.handleSubmit}
                 isDisabled={isSubmitting}
-                className="mt-1"
+                className="mt-1 rounded-2xl bg-lime-300"
               >
                 {isSubmitting ? (
                   <View className="flex-row items-center justify-center gap-2">
@@ -170,15 +170,15 @@ function SignIn() {
                 )}
               </Button>
 
-              <text className="text-center text-sm text-muted">
+              <Text className="text-center text-sm text-white/60">
                 Pas de compte ?{" "}
                 <Text
-                  className="text-primary"
+                  className="text-lime-300"
                   onPress={() => router.push("/sign-up")}
                 >
                   Inscrivez-vous
                 </Text>
-              </text>
+              </Text>
             </View>
           </>
         );
