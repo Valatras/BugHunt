@@ -31,26 +31,26 @@ export function HeroSection({
             Chasse aux insectes
           </div>
 
-        <div className="space-y-5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/70">
-            <span
-              className={[
-                "h-2 w-2 rounded-full",
-                isLoading
-                  ? "bg-amber-300 animate-pulse"
-                  : isConnected
-                    ? "bg-lime-300"
-                    : "bg-rose-300",
-              ].join(" ")}
-            />
-            {isLoading
-              ? "Synchronisation en cours"
-              : isConnected
-                ? "Connexion active"
-                : "Mode hors ligne"}
-          </div>
+          <div className="space-y-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/70">
+              <span
+                className={[
+                  "h-2 w-2 rounded-full",
+                  isLoading
+                    ? "bg-amber-300 animate-pulse"
+                    : isConnected
+                      ? "bg-lime-300"
+                      : "bg-rose-300",
+                ].join(" ")}
+              />
+              {isLoading
+                ? "Synchronisation en cours"
+                : isConnected
+                  ? "Connexion active"
+                  : "Mode hors ligne"}
+            </div>
 
-          <h1 className="max-w-3xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-3xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
               {session?.user ? (
                 <>
                   Bonjour <span className="text-lime-300">{displayName}</span>.
@@ -76,7 +76,9 @@ export function HeroSection({
               onClick={onGetStarted}
               className="h-12 rounded-full bg-lime-300 px-6 text-sm font-semibold text-[#08110e] shadow-xl shadow-lime-500/20 hover:bg-lime-200"
             >
-              {session?.user ? "Aller au tableau de bord" : "Commencer l’aventure"}
+              {session?.user
+                ? "Aller au tableau de bord"
+                : "Commencer l’aventure"}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
 
@@ -92,14 +94,18 @@ export function HeroSection({
 
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-              <div className="text-sm font-medium text-white/60">Exploration</div>
+              <div className="text-sm font-medium text-white/60">
+                Exploration
+              </div>
               <div className="mt-2 text-2xl font-bold text-white">100%</div>
               <div className="mt-1 text-xs text-white/50">
                 Des itinéraires pensés comme une expédition.
               </div>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-              <div className="text-sm font-medium text-white/60">Collection</div>
+              <div className="text-sm font-medium text-white/60">
+                Collection
+              </div>
               <div className="mt-2 text-2xl font-bold text-white">Vivante</div>
               <div className="mt-1 text-xs text-white/50">
                 Espèces, rareté et progression regroupées au même endroit.
@@ -151,7 +157,9 @@ export function HeroSection({
                   <div className="text-xs uppercase tracking-[0.2em] text-white/45">
                     Rareté du jour
                   </div>
-                  <div className="mt-2 text-3xl font-black text-white">Rare</div>
+                  <div className="mt-2 text-3xl font-black text-white">
+                    Rare
+                  </div>
                   <div className="mt-1 text-sm text-white/60">
                     Quelques captures suffisent pour la débloquer.
                   </div>

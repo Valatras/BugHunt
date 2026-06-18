@@ -36,7 +36,11 @@ function InsectCard({
       onPress={() => onPress?.(insect.id)}
       className="active:opacity-80"
     >
-      <Card className={[frontendLayout.cardSurface, "overflow-hidden p-0"].join(" ")}>
+      <Card
+        className={[frontendLayout.cardSurface, "overflow-hidden p-0"].join(
+          " ",
+        )}
+      >
         {/* Image Placeholder */}
         <View
           className="h-40 items-center justify-center border-b border-white/10"
@@ -87,7 +91,11 @@ export function FeaturedInsectsSection({
           title="Insectes en vedette"
           description="Découvrez les derniers ajouts à notre collection"
         />
-        <View className={frontendLayout.cardSurface + " mt-6 w-full items-center py-8"}>
+        <View
+          className={
+            frontendLayout.cardSurface + " mt-6 w-full items-center py-8"
+          }
+        >
           <Ionicons name="hourglass-outline" size={32} color={mutedColor} />
           <Text className="mt-2 text-white/60">Chargement...</Text>
         </View>
@@ -144,7 +152,9 @@ export function FeaturedInsectsSection({
 
       {/* Empty State */}
       {insects.length === 0 && !isLoading && (
-        <View className={frontendLayout.emptyState + " mx-6 mt-6 items-center py-8"}>
+        <View
+          className={frontendLayout.emptyState + " mx-6 mt-6 items-center py-8"}
+        >
           <Ionicons name="bug" size={32} color={mutedColor} />
           <Text className="mt-2 text-white/60">
             Aucun insecte en vedette pour le moment

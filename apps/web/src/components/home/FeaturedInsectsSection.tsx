@@ -1,12 +1,14 @@
-import { ArrowRight, BadgeInfo, Bug, Hourglass } from "lucide-react";
+import { ArrowRight, BadgeInfo, Hourglass } from "lucide-react";
 
 import { Card } from "@my-better-t-app/ui/components/card";
+import { InsectImage } from "@/components/insects/InsectImage";
 
 type InsectCardItem = {
   id: number;
   name: string;
   rarity?: string;
   sciName?: string;
+  imageKey?: string | null;
 };
 
 type FeaturedInsectsSectionProps = {
@@ -29,15 +31,17 @@ function InsectCard({
         onClick={() => onPress?.(insect.id)}
         className="flex h-full w-full flex-col overflow-hidden text-left"
       >
-        <div className="flex h-40 items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.24),_rgba(15,23,42,0.1)_50%),linear-gradient(135deg,rgba(16,185,129,0.18),rgba(245,158,11,0.15))]">
-          <Bug className="h-12 w-12 text-white/90 transition group-hover:scale-110" />
-        </div>
+        <InsectImage imageKey={insect.imageKey} name={insect.name} size="md" />
 
         <div className="flex flex-1 flex-col gap-3 p-4">
           <div className="min-h-10">
-            <h3 className="text-base font-semibold text-white">{insect.name}</h3>
+            <h3 className="text-base font-semibold text-white">
+              {insect.name}
+            </h3>
             {insect.sciName ? (
-              <p className="mt-1 text-xs italic text-white/50">{insect.sciName}</p>
+              <p className="mt-1 text-xs italic text-white/50">
+                {insect.sciName}
+              </p>
             ) : null}
           </div>
 

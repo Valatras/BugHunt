@@ -8,6 +8,7 @@ type Props = {
     rarity?: string | null;
     owned?: boolean;
     quantity?: number;
+    imageKey?: string | null;
   }>;
 };
 

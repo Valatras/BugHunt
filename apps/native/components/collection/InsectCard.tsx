@@ -1,8 +1,18 @@
 import { Pressable, Text, View } from "react-native";
 import { router } from "expo-router";
 
+import { InsectImage } from "@/components/insects/InsectImage";
+
 type Props = {
-  insect: any;
+  insect: {
+    id: number;
+    name: string;
+    sciName?: string;
+    rarity?: string | null;
+    owned?: boolean;
+    quantity?: number;
+    imageKey?: string | null;
+  };
 };
 
 export function InsectCard({ insect }: Props) {
@@ -22,8 +32,11 @@ export function InsectCard({ insect }: Props) {
     ${!insect.owned ? "opacity-30" : ""}
   `}
     >
-      {/* ICON PLACEHOLDER */}
-      <Text className="text-center text-4xl">{insect.owned ? "🐞" : "❓"}</Text>
+      <InsectImage
+        imageKey={insect.owned ? insect.imageKey : null}
+        name={insect.name}
+        size="sm"
+      />
 
       {/* NAME */}
       <Text className="mt-2 text-center text-white font-bold">

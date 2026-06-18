@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, HelpCircle } from "lucide-react";
+import { InsectImage } from "@/components/insects/InsectImage";
 
 type Insect = {
   id: number;
@@ -8,6 +9,7 @@ type Insect = {
   rarity?: string | null;
   owned?: boolean;
   quantity?: number;
+  imageKey?: string | null;
 };
 
 type Props = {
@@ -29,13 +31,11 @@ export function InsectCard({ insect }: Props) {
       ].join(" ")}
     >
       <div className="flex h-full flex-col overflow-hidden">
-        <div className="flex h-32 items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.24),_rgba(2,6,3,0.08)_55%),linear-gradient(135deg,rgba(16,185,129,0.18),rgba(245,158,11,0.14))]">
-          {owned ? (
-            <CheckCircle2 className="h-10 w-10 text-white/90" />
-          ) : (
-            <HelpCircle className="h-10 w-10 text-white/65" />
-          )}
-        </div>
+        <InsectImage
+          imageKey={owned ? insect.imageKey : null}
+          name={owned ? insect.name : insect.name}
+          size="md"
+        />
 
         <div className="flex flex-1 flex-col gap-3 p-4">
           <div>

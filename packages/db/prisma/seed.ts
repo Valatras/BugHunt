@@ -227,7 +227,8 @@ const insects: Insect[] = [
     description:
       "Le plus grand papillon du monde. Cette espèce extrêmement rare est endémique de certaines régions de Papouasie-Nouvelle-Guinée.",
   },
-];// ============================================
+];
+// ============================================
 // DONNÉES D'UTILISATEURS
 // ============================================
 

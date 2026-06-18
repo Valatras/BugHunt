@@ -1,15 +1,10 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import {
-  ArrowLeft,
-  BadgeCheck,
-  Bug,
-  Sparkles,
-  Wand2,
-} from "lucide-react";
+import { ArrowLeft, BadgeCheck, Bug, Sparkles, Wand2 } from "lucide-react";
 
 import { getUser } from "@/functions/get-user";
 import { orpc } from "@/utils/orpc";
+import { InsectImage } from "@/components/insects/InsectImage";
 
 export const Route = createFileRoute("/insect/$id")({
   component: InsectDetailsRoute,
@@ -82,7 +77,11 @@ function InsectDetailsRoute() {
         <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/20">
           <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="flex min-h-[22rem] items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.24),_transparent_40%),linear-gradient(135deg,rgba(16,185,129,0.2),rgba(245,158,11,0.14))]">
-              <Bug className="h-24 w-24 text-white/90" />
+              <InsectImage
+                imageKey={data.owned ? data.imageKey : null}
+                name={data.name}
+                size="lg"
+              />
             </div>
 
             <div className="space-y-6 p-8">
@@ -96,7 +95,9 @@ function InsectDetailsRoute() {
                   {data.owned ? data.name : "Espèce inconnue"}
                 </h1>
                 <p className="mt-2 text-sm italic text-white/55">
-                  {data.owned ? data.sciName : "Débloquez cette espèce en la capturant"}
+                  {data.owned
+                    ? data.sciName
+                    : "Débloquez cette espèce en la capturant"}
                 </p>
               </div>
 

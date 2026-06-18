@@ -4,6 +4,7 @@ import { Button, Surface } from "heroui-native";
 import { ScrollView, Text, View } from "react-native";
 
 import { Container } from "@/components/container";
+import { InsectImage } from "@/components/insects/InsectImage";
 import { orpc } from "@/utils/orpc";
 
 export default function InsectModal() {
@@ -43,11 +44,13 @@ export default function InsectModal() {
       >
         <View className="flex-1 justify-center">
           <Surface variant="secondary" className="rounded-3xl p-5">
-            <Text className="mb-4 text-center text-3xl">
-              {data.owned ? "🐞" : "❓"}
-            </Text>
+            <InsectImage
+              imageKey={data.owned ? data.imageKey : null}
+              name={data.name}
+              size="lg"
+            />
 
-            <Text className="text-foreground text-xl font-bold">
+            <Text className="mt-4 text-xl font-bold text-foreground">
               {data.owned ? data.name : "Espèce inconnue"}
             </Text>
 
