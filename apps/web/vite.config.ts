@@ -14,6 +14,8 @@ export default defineConfig({
         "http://localhost:8081",
         "http://127.0.0.1:8081",
         "http://100.111.244.51:8081",
+        "http://100.111.244.51:3001",
+        
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
