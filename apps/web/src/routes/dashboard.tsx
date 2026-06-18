@@ -8,6 +8,8 @@ import { StatsGrid } from "@/components/dashboard/StatsGrid";
 import { LevelProgress } from "@/components/dashboard/LevelProgress";
 import { CollectionPreview } from "@/components/dashboard/CollectionPreview";
 import { RecentCaptures } from "@/components/dashboard/RecentCaptures";
+import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
+import { useDashboardMetrics } from "hooks";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardRoute,
@@ -34,28 +36,29 @@ function DashboardRoute() {
       limit: 5,
     }),
   );
+  const dashboardMetrics = useDashboardMetrics(stats.data);
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="space-y-6">
+    <main className={frontendLayout.pageContainer}>
+      <div className={frontendLayout.pageStack}>
         <ProfileHeader
           name={session?.user.name ?? "Explorer"}
           image={session?.user.image}
         />
 
         <StatsGrid
-          points={stats.data?.points ?? 0}
-          species={stats.data?.discoveredSpecies ?? 0}
-          steps={stats.data?.todaySteps ?? 0}
-          level={stats.data?.level ?? 1}
+          points={dashboardMetrics.points}
+          species={dashboardMetrics.species}
+          steps={dashboardMetrics.steps}
+          level={dashboardMetrics.level}
         />
 
-        <LevelProgress points={stats.data?.points ?? 0} />
+        <LevelProgress points={dashboardMetrics.points} />
 
         <CollectionPreview
           collection={collection.data ?? []}
-          completion={stats.data?.completion ?? 0}
-          totalSpecies={stats.data?.totalSpecies ?? 0}
+          completion={dashboardMetrics.completion}
+          totalSpecies={dashboardMetrics.totalSpecies}
         />
 
         <RecentCaptures captures={recentCaptures.data ?? []} />
