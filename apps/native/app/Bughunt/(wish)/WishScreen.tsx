@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View, Pressable } from "react-native";
 
 import { Container } from "@/components/container";
 import { InsectImage } from "@/components/insects/InsectImage";
 import { frontendLayout } from "@my-better-t-app/ui/lib/frontend-layout";
-import { orpc } from "@/utils/orpc";
+import { orpc, queryClient } from "@/utils/orpc";
 
 const bannerConfigs = {
   standard: {
@@ -41,6 +41,12 @@ export function WishScreen({ banner }: WishScreenProps) {
     orpc.userInsect.summon.mutationOptions({
       onSettled: () => {
         userStats.refetch();
+        queryClient.invalidateQueries({
+          queryKey: orpc.userInsect.getMyCollection.queryKey(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: orpc.userInsect.getRecent.queryKey(),
+        });
       },
     }),
   );
